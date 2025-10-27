@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projets 1A — Catalogue</title>
+<style>
+*{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;margin:0;background:#f7f7fb;color:#111}
+.header{position:sticky;top:0;z-index:50;background:#ffffffcc;backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #eee}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+h1{font-size:28px;margin:0 0 10px}
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 16px;align-items:center}
+input[type="search"],select{padding:10px 12px;border:1px solid #ddd;border-radius:10px;font-size:14px;min-width:220px;background:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding:20px 0}
+.card{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.card h3{margin:0 0 8px;font-size:18px;line-height:1.2}
+.card h3 a{text-decoration:none;color:#0a58ca}
+.card h3 a:hover{text-decoration:underline}
+.meta{font-size:13px;color:#444;margin:6px 0;display:flex;gap:8px;flex-wrap:wrap}
+.badge{display:inline-block;font-size:11px;padding:4px 10px;border-radius:999px;background:#eef;border:1px solid #dde;color:#334}
+.badge.missing{background:#fff4f4;border-color:#f1c6c6;color:#a33}
+.badge.pr{background:#ffe6c7;border-color:#f4c690;color:#8b5a00}
+.keywords{font-size:12px;color:#555;margin-top:8px}
+.count{font-size:12px;color:#666;margin-left:auto;align-self:center}
+.footer{color:#777;font-size:12px;text-align:center;padding:20px}
+</style>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>Projets 1A — Catalogue</h1>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Rechercher (titre, encadrant, laboratoire, mots-clés)…">
+        <select id="lab"><option value="">Tous les labos</option><option value="CERMICS">CERMICS</option><option value="CSTB">CSTB</option><option value="Cosys / Grettia - Université Gustave Eiffel - Marne-la-Vallée">Cosys / Grettia - Université Gustave Eiffel - Marne-la-Vallée</option><option value="DRIPE">DRIPE</option><option value="DotBlocks">DotBlocks</option><option value="EDF">EDF</option><option value="HM&amp;Co">HM&amp;Co</option><option value="IUSTI - UMR 7343 CNRS - Aix Marseille Université">IUSTI - UMR 7343 CNRS - Aix Marseille Université</option><option value="LEESU">LEESU</option><option value="LEESU/LHSV">LEESU/LHSV</option><option value="LEESU; LVMT">LEESU; LVMT</option><option value="LHS, ENPC et UGE">LHS, ENPC et UGE</option><option value="LHSV">LHSV</option><option value="LIGM">LIGM</option><option value="LVMT">LVMT</option><option value="Laboratoire Navier">Laboratoire Navier</option><option value="MCD">MCD</option><option value="NAVIER">NAVIER</option><option value="Navier">Navier</option><option value="d.school Paris - département de Design et d&#x27;Innovation">d.school Paris - département de Design et d&#x27;Innovation</option><option value="setec international">setec international</option></select>
+        <select id="pr">
+          <option value="">Tous</option>
+          <option value="PR">Seulement PR</option>
+          <option value="NONPR">Sans PR</option>
+        </select>
+        <div id="count" class="count"></div>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <section class="grid">
+      
+    <article class="card" data-haystack="OVERTOPPING : Étude expérimental de systèmes anti-franchissement dans un canal à houle | REMI CARMIGNIANI | LHSV | Mécanique des fluides, Expérimental, Vagues, Capteurs | PR" data-lab="LHSV" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EVfH3K6VZClFrB-7zACvfkABffvT0piKjmJt-yVm0DwIUA?e=0oIus5" target="_blank" rel="noopener">OVERTOPPING : Étude expérimental de systèmes anti-franchissement dans un canal à houle</a></h3>
+      <div class="meta">👤 REMI CARMIGNIANI <span class="badge">LHSV</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Mécanique des fluides, Expérimental, Vagues, Capteurs</div>
+    </article>
+    
+    <article class="card" data-haystack="ETUDE AERODYNAMIQUE DE PROJECTILES SPORTIFS : LE JAVELOT | REMI CARMIGNIANI | LHS, ENPC et UGE | Aérodynamique, projectile sportif, javelot | PR" data-lab="LHS, ENPC et UGE" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ed04w9NnTpBDoHaynWIAD5UBwEkfFGJVLJplUVgxLW4XFQ?e=z02f7K" target="_blank" rel="noopener">ETUDE AERODYNAMIQUE DE PROJECTILES SPORTIFS : LE JAVELOT</a></h3>
+      <div class="meta">👤 REMI CARMIGNIANI <span class="badge">LHS, ENPC et UGE</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Aérodynamique, projectile sportif, javelot</div>
+    </article>
+    
+    <article class="card" data-haystack="Safe Reinforcement Learning et Applications à la Conduite Autonome. | Nadir FARHI | Cosys / Grettia - Université Gustave Eiffel - Marne-la-Vallée | Apprentissage par renforcement, Conduite autonome, mobilité urbaine. | PR" data-lab="Cosys / Grettia - Université Gustave Eiffel - Marne-la-Vallée" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/ETFV8s_okOVClbAcA_CSIfgBtyKCB01hu0dAs5qz7zVZDg?e=51zaTh" target="_blank" rel="noopener">Safe Reinforcement Learning et Applications à la Conduite Autonome.</a></h3>
+      <div class="meta">👤 Nadir FARHI <span class="badge">Cosys / Grettia - Université Gustave Eiffel - Marne-la-Vallée</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Apprentissage par renforcement, Conduite autonome, mobilité urbaine.</div>
+    </article>
+    
+    <article class="card" data-haystack="Exploration du potentiel des mousses liquides pour les procédés de la mine urbaine | OLIVIER PITOIS | Navier | Procédé, recyclage, bulles, milieux granulaires, rhéologie | PR" data-lab="Navier" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EdCSyZPcZ-9DnJkKC0NLWvsBcYjBTTjkntDdj89hTPsJQg?e=bTHdBd" target="_blank" rel="noopener">Exploration du potentiel des mousses liquides pour les procédés de la mine urbaine</a></h3>
+      <div class="meta">👤 OLIVIER PITOIS <span class="badge">Navier</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Procédé, recyclage, bulles, milieux granulaires, rhéologie</div>
+    </article>
+    
+    <article class="card" data-haystack="Modéliser un épisode de la Grande Peur (1789) : processus de diffusion sur les réseaux, modèles de percolation et modèles épidémiologiques | Olivier BONIN | LVMT | modèles épidémiologiques, diffusion sur les réseaux, percolation, modélisation numérique | PR" data-lab="LVMT" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EerCJOWvoDxGi5_gMiwhWl0Bn8E4k8uXRVfqyhBY1CiHhg?e=gTpUZS" target="_blank" rel="noopener">Modéliser un épisode de la Grande Peur (1789) : processus de diffusion sur les réseaux, modèles de percolation et modèles épidémiologiques</a></h3>
+      <div class="meta">👤 Olivier BONIN <span class="badge">LVMT</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ modèles épidémiologiques, diffusion sur les réseaux, percolation, modélisation numérique</div>
+    </article>
+    
+    <article class="card" data-haystack="Modélisation du bilan hydrique des sols et projection des risques de retrait-gonflement des argiles en  contexte de changement climatique | Carl TIXIER | HM&amp;Co | changement climatique, retrait-gonflement des argiles, modélisation | PR" data-lab="HM&amp;Co" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EerCJOWvoDxGi5_gMiwhWl0Bn8E4k8uXRVfqyhBY1CiHhg?e=MNku7g" target="_blank" rel="noopener">Modélisation du bilan hydrique des sols et projection des risques de retrait-gonflement des argiles en  contexte de changement climatique</a></h3>
+      <div class="meta">👤 Carl TIXIER <span class="badge">HM&amp;Co</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ changement climatique, retrait-gonflement des argiles, modélisation</div>
+    </article>
+    
+    <article class="card" data-haystack="Modélisation de vagues en zone côtière par apprentissage automatique | MARISSA YATES MICHELIN | LHSV | mécanique des fluides, apprentissage automatique, vagues, programmation | PR" data-lab="LHSV" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EW_QZXbaIiJJuQC9jO_aRhoB0VnSx5fpUhZ-80rjBOu_Tw?e=5egSto" target="_blank" rel="noopener">Modélisation de vagues en zone côtière par apprentissage automatique</a></h3>
+      <div class="meta">👤 MARISSA YATES MICHELIN <span class="badge">LHSV</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ mécanique des fluides, apprentissage automatique, vagues, programmation</div>
+    </article>
+    
+    <article class="card" data-haystack="Impact de la bathymétrie sur les vagues déferlantes | MARISSA YATES MICHELIN | LHSV | mécanique des fluides, programmation, vagues, analyse de sensibilité | PR" data-lab="LHSV" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EVEgszX9c6VOmBOgI2CORl8B38_-IQ5N7HPf0tdNGUrbMA?e=RUoS3E" target="_blank" rel="noopener">Impact de la bathymétrie sur les vagues déferlantes</a></h3>
+      <div class="meta">👤 MARISSA YATES MICHELIN <span class="badge">LHSV</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ mécanique des fluides, programmation, vagues, analyse de sensibilité</div>
+    </article>
+    
+    <article class="card" data-haystack="CTSC : Captage, Transport et Stockage géologique du CO2 | SIAVASH GHABEZLOO | Laboratoire Navier | Stockage géologique du CO2, Mécanique des milieux poreux | PR" data-lab="Laboratoire Navier" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ecbt7RYW8qFOoQ9rd2daMHQB_NrEYSpx6ucdyFxyJEERIw?e=WUjy9s" target="_blank" rel="noopener">CTSC : Captage, Transport et Stockage géologique du CO2</a></h3>
+      <div class="meta">👤 SIAVASH GHABEZLOO <span class="badge">Laboratoire Navier</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Stockage géologique du CO2, Mécanique des milieux poreux</div>
+    </article>
+    
+    <article class="card" data-haystack="Réduire le risque de retrait-gonflement des argiles par salinisation | Anh Minh TANG | NAVIER | Diffusion, sols argileux, sel, prévention, retrait-gonflement | PR" data-lab="NAVIER" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EYOuTCb4ttlAgJWKaeybWmYBGumUZweXoVX93jjfTm-NNg?e=F8Ew2b" target="_blank" rel="noopener">Réduire le risque de retrait-gonflement des argiles par salinisation</a></h3>
+      <div class="meta">👤 Anh Minh TANG <span class="badge">NAVIER</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Diffusion, sols argileux, sel, prévention, retrait-gonflement</div>
+    </article>
+    
+    <article class="card" data-haystack="Points de Fuites dans les Images | Pascal MONASSE | LIGM | Perspective en vision, traitement d’images | PR" data-lab="LIGM" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EYGO7f0ej-JOkHYfHcbf4-QBh25fXD-lmthZIjEMaxPqIA?e=CnkHel" target="_blank" rel="noopener">Points de Fuites dans les Images</a></h3>
+      <div class="meta">👤 Pascal MONASSE <span class="badge">LIGM</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Perspective en vision, traitement d’images</div>
+    </article>
+    
+    <article class="card" data-haystack="Détection d’ensembles urbains homogènes pour la rénovation énergétique des bâtiments | Thomas BERTHOU | CSTB | data-science, urbanisme, décarbonation des bâtiments | PR" data-lab="CSTB" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EdblF_Zmu1NDoQmINQTDyyUBq1J1d9rYjTKiZQrt1Yux_Q?e=fIMl0b" target="_blank" rel="noopener">Détection d’ensembles urbains homogènes pour la rénovation énergétique des bâtiments</a></h3>
+      <div class="meta">👤 Thomas BERTHOU <span class="badge">CSTB</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ data-science, urbanisme, décarbonation des bâtiments</div>
+    </article>
+    
+    <article class="card" data-haystack="Réduction de modèle : Proper Orthogonal Decomposition (POD) et méthode des bases réduites | Sofiane EZZEHI | CERMICS | Réduction de modèle, Équation aux dérivées partielles, Formulation variationnelle | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ETst9WX9Z6FBvR1VvQfwB4QBX4Bo4yKNGK-wUrLFgJztPA?e=eSq8jN" target="_blank" rel="noopener">Réduction de modèle : Proper Orthogonal Decomposition (POD) et méthode des bases réduites</a></h3>
+      <div class="meta">👤 Sofiane EZZEHI <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Réduction de modèle, Équation aux dérivées partielles, Formulation variationnelle</div>
+    </article>
+    
+    <article class="card" data-haystack="Réseaux de neurones pour la résolution d’équations aux dérivées partielles (EDP) | Sofiane EZZEHI | CERMICS | Réseaux de neurones, Équations aux dérivées partielles, Optimisation, formulation variationnelle | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ed8k1sjs1LdAo6Mzf-KEJJwBmjRcJcgqxsbjbVAYdXqNDg?e=7XNYbr" target="_blank" rel="noopener">Réseaux de neurones pour la résolution d’équations aux dérivées partielles (EDP)</a></h3>
+      <div class="meta">👤 Sofiane EZZEHI <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Réseaux de neurones, Équations aux dérivées partielles, Optimisation, formulation variationnelle</div>
+    </article>
+    
+    <article class="card" data-haystack="Régulation de systèmes de véhicules partagés (e.g., Vélib&#x27;) | Rose SOSSOU EDOU | CERMICS | Régulation de systèmes de véhicules partagés | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/personal/christos_papoutsellis_enpc_fr/Documents/Applications/Microsoft%20Forms/Projets%20de%20Recherche%201A/Question/Projetderecherche_Rose%20SOSSOU%20EDOU.pdf" target="_blank" rel="noopener">Régulation de systèmes de véhicules partagés (e.g., Vélib&#x27;)</a></h3>
+      <div class="meta">👤 Rose SOSSOU EDOU <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Régulation de systèmes de véhicules partagés</div>
+    </article>
+    
+    <article class="card" data-haystack="Calibration des modèles d’indice financier dont la volatilité dépend purement du chemin suivi par l’indice | Thibault JEANNIN | CERMICS | Déconvolution, Problème Inverse, Mathématiques Financières | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ea9thDLu8s5EuS0MzHPC7FcBn72_8ZjXkVKodQqSrURddQ?e=tsKvHG" target="_blank" rel="noopener">Calibration des modèles d’indice financier dont la volatilité dépend purement du chemin suivi par l’indice</a></h3>
+      <div class="meta">👤 Thibault JEANNIN <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Déconvolution, Problème Inverse, Mathématiques Financières</div>
+    </article>
+    
+    <article class="card" data-haystack="Modelisation mathematique des vagues cotieres | Christos PAPOUTSELLIS | LHSV | ondes de surface, EDP non-linéaires et dispersives, méthodes numériques | PR" data-lab="LHSV" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Eemgb1dNAVtJqyCvUEmTnTYBh97SBrHxHoQSsdfG90EMNQ?e=3mnzjF" target="_blank" rel="noopener">Modelisation mathematique des vagues cotieres</a></h3>
+      <div class="meta">👤 Christos PAPOUTSELLIS <span class="badge">LHSV</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ ondes de surface, EDP non-linéaires et dispersives, méthodes numériques</div>
+    </article>
+    
+    <article class="card" data-haystack="Capacité des villes à freiner la propagation d’ondes instationaires : approche par la simulation | Olivier BONIN | LVMT | modélisation numérique, équations de Saint-Venant, EDP, réseaux de neurone | PR" data-lab="LVMT" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ed-JT0QOLPFKvcb023nHJSABjkGk5QW_-UFAw1YKfgdLeQ?e=AAJm0m" target="_blank" rel="noopener">Capacité des villes à freiner la propagation d’ondes instationaires : approche par la simulation</a></h3>
+      <div class="meta">👤 Olivier BONIN <span class="badge">LVMT</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ modélisation numérique, équations de Saint-Venant, EDP, réseaux de neurone</div>
+    </article>
+    
+    <article class="card" data-haystack="Dynamique de Langevin pour l’estimation bayésienne | Paul INVERNIZZI | CERMICS |  | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ecpn0kN42SdJp7p3PMAnZhgB8HWiOIiDrkH3d5ue0WXKvQ?e=31PiRV" target="_blank" rel="noopener">Dynamique de Langevin pour l’estimation bayésienne</a></h3>
+      <div class="meta">👤 Paul INVERNIZZI <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Foundations of Quantum Chemistry: Manifold Structures in Wavefunction Methods and Density Functional Theory | Yukuan HU | CERMICS |  | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EcNL6F9HI6pOhHnQWWEeWOwBo2JhjxXcFRoDyAKWXSCJEA?e=22M9Yv" target="_blank" rel="noopener">Foundations of Quantum Chemistry: Manifold Structures in Wavefunction Methods and Density Functional Theory</a></h3>
+      <div class="meta">👤 Yukuan HU <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Régression linéaire en (très) haute dimension | Loucas PILLAUD VIVIEN | CERMICS |  | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ecxrl0JtzSpJi2InQ3d2bH4BG2akpVMeVLrsZMiL-3tqiQ?e=z3eeh1" target="_blank" rel="noopener">Régression linéaire en (très) haute dimension</a></h3>
+      <div class="meta">👤 Loucas PILLAUD VIVIEN <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Modéliser la circularité de l’eau urbaine pour la résilience climatique | Yangzi QIU | LEESU; LVMT | Circularité de l’eau, Prototype numérique, Résilience urbaine | PR" data-lab="LEESU; LVMT" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EZH5gpOVu6NNotrHmNeoXKkBjRXdt2nh_eYkhin6eDbXkw?e=TviMFv" target="_blank" rel="noopener">Modéliser la circularité de l’eau urbaine pour la résilience climatique</a></h3>
+      <div class="meta">👤 Yangzi QIU <span class="badge">LEESU; LVMT</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Circularité de l’eau, Prototype numérique, Résilience urbaine</div>
+    </article>
+    
+    <article class="card" data-haystack="Mesurer et modéliser la pollution dans le métro de Paris.  Une approche avec des capteurs portatifs et du machine learning. | Laurent PROULHAC | LVMT | capteur portatif, machine learning, concentration, exposition, PM2.5, métro | PR" data-lab="LVMT" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ER_JhkxbPsBFojxQhf0MQSsBUI-vVnmFjxUDbzglnC_LZA?e=PPeiIR" target="_blank" rel="noopener">Mesurer et modéliser la pollution dans le métro de Paris.  Une approche avec des capteurs portatifs et du machine learning.</a></h3>
+      <div class="meta">👤 Laurent PROULHAC <span class="badge">LVMT</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ capteur portatif, machine learning, concentration, exposition, PM2.5, métro</div>
+    </article>
+    
+    <article class="card" data-haystack="Régression linéaire en (très) haute dimension | Loucas PILLAUD VIVIEN | CERMICS | Statistiques, Optimisation, Descente de Gradient (stochastique) | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EdUTdRUmyM5GuFxphjsCGEIBoIL-gLCxIIFQRzSRz78tXg?e=phXlFM" target="_blank" rel="noopener">Régression linéaire en (très) haute dimension</a></h3>
+      <div class="meta">👤 Loucas PILLAUD VIVIEN <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Statistiques, Optimisation, Descente de Gradient (stochastique)</div>
+    </article>
+    
+    <article class="card" data-haystack="Régulation de systèmes de véhicules partagés (e.g., Vélib&#x27;) | Rose SOSSOU EDOU | CERMICS | Régulation de systèmes de véhicules partagés | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/EXxYsQUAH5RNgVb49DdUcvcBelJytKLiH_8Gq3xwXIiMNg?e=Vt7JQx" target="_blank" rel="noopener">Régulation de systèmes de véhicules partagés (e.g., Vélib&#x27;)</a></h3>
+      <div class="meta">👤 Rose SOSSOU EDOU <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Régulation de systèmes de véhicules partagés</div>
+    </article>
+    
+    <article class="card" data-haystack="Construction en terre crue : Durabilité des matériaux | Emmanuel KEITA | Navier | terre crue, bâtiment, durabilité, mesure, modèle | PR" data-lab="Navier" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EcRI1jAaUcNMirn51o7lSG8BGngB6M0NQFWfTOYMBnDlAw?e=BEYykX" target="_blank" rel="noopener">Construction en terre crue : Durabilité des matériaux</a></h3>
+      <div class="meta">👤 Emmanuel KEITA <span class="badge">Navier</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ terre crue, bâtiment, durabilité, mesure, modèle</div>
+    </article>
+    
+    <article class="card" data-haystack="Sur l’intérieur relatif des ensembles convexes compacts dans EVT | Lu YU | CERMICS | Convexité, topologie élémentaire, ETV, convex compact | PR" data-lab="CERMICS" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/Ebfp_lp9AJpFvBjbYgbXwfgB9Rhq6AKYlVNk81eF9pJULg?e=ny1A9P" target="_blank" rel="noopener">Sur l’intérieur relatif des ensembles convexes compacts dans EVT</a></h3>
+      <div class="meta">👤 Lu YU <span class="badge">CERMICS</span> <span class="badge pr">PR</span></div>
+      <div class="keywords">🗝️ Convexité, topologie élémentaire, ETV, convex compact</div>
+    </article>
+    
+    <article class="card" data-haystack="LA VILLE EN 2037 : Concevoir et débattre des futurs souhaitables | Klervie PENSEC | d.school Paris - département de Design et d&#x27;Innovation | prospective, design fiction, ville, futur souhaitable, innovation, | " data-lab="d.school Paris - département de Design et d&#x27;Innovation" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ET-ZzmLC8RxOvfjnLhdfAXUBfSzx_DhhiNqMY34hNtP7eQ?e=Vz0ce9" target="_blank" rel="noopener">LA VILLE EN 2037 : Concevoir et débattre des futurs souhaitables</a></h3>
+      <div class="meta">👤 Klervie PENSEC <span class="badge">d.school Paris - département de Design et d&#x27;Innovation</span> </div>
+      <div class="keywords">🗝️ prospective, design fiction, ville, futur souhaitable, innovation,</div>
+    </article>
+    
+    <article class="card" data-haystack="Amortissement passif des structures | Gwendal CUMUNEL | Navier | contrôle passif, amortisseur à masse accordée, optimisation | " data-lab="Navier" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EXzObYNM21BFsQHkAYPH0Z4BJ1fV2jgrBKJyIhHrPxUIFQ?e=Suv2gR" target="_blank" rel="noopener">Amortissement passif des structures</a></h3>
+      <div class="meta">👤 Gwendal CUMUNEL <span class="badge">Navier</span> </div>
+      <div class="keywords">🗝️ contrôle passif, amortisseur à masse accordée, optimisation</div>
+    </article>
+    
+    <article class="card" data-haystack="Quantifier l’impact d’incidents sur le trafic routier | Nadia LE MOIGNE | setec international | traitement de données, trafic routier, débit, incident, accident, congestion, climat, vulnérabilité fonctionnelle, résilience des infrastructures, SIG | " data-lab="setec international" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Eek1iZHziPhOsWJWcpFbIAkBs1uDXf2Ey8gnRX92iSVWpA?e=hpT7uT" target="_blank" rel="noopener">Quantifier l’impact d’incidents sur le trafic routier</a></h3>
+      <div class="meta">👤 Nadia LE MOIGNE <span class="badge">setec international</span> </div>
+      <div class="keywords">🗝️ traitement de données, trafic routier, débit, incident, accident, congestion, climat, vulnérabilité fonctionnelle, résilience des infrastructures, SIG</div>
+    </article>
+    
+    <article class="card" data-haystack="Mesure du vecteur vitesse aérodynamique d’un drone | Gilles BOUCHET | IUSTI - UMR 7343 CNRS - Aix Marseille Université | Aérodynamique ; soufflerie ; drone | " data-lab="IUSTI - UMR 7343 CNRS - Aix Marseille Université" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EQGyJLUJPwBDnVEuC1axQhsBbJZVcjvj0MWf9hmhX1JY_A?e=7vACsa" target="_blank" rel="noopener">Mesure du vecteur vitesse aérodynamique d’un drone</a></h3>
+      <div class="meta">👤 Gilles BOUCHET <span class="badge">IUSTI - UMR 7343 CNRS - Aix Marseille Université</span> </div>
+      <div class="keywords">🗝️ Aérodynamique ; soufflerie ; drone</div>
+    </article>
+    
+    <article class="card" data-haystack="Conception d&#x27;un drone marin | Gilles BOUCHET | IUSTI - UMR 7343 CNRS - Aix Marseille Université | Aérodynamique ; modélisation ; conception ; prototype rapide | " data-lab="IUSTI - UMR 7343 CNRS - Aix Marseille Université" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ET9jHrHJwutHh95uBZOjjMkBhc_jLIoX-fhNI0LyJcxC6A?e=ZUi0ZZ" target="_blank" rel="noopener">Conception d&#x27;un drone marin</a></h3>
+      <div class="meta">👤 Gilles BOUCHET <span class="badge">IUSTI - UMR 7343 CNRS - Aix Marseille Université</span> </div>
+      <div class="keywords">🗝️ Aérodynamique ; modélisation ; conception ; prototype rapide</div>
+    </article>
+    
+    <article class="card" data-haystack="Stockage intersaisonier de chaleur | Anh Minh TANG | NAVIER | Géothermie, transfert thermique, stockage | " data-lab="NAVIER" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EfYV-80_2hFKpduSYZDjdlsB8gbhHl3XiwRNZn7M3CphjQ?e=eRKdWa" target="_blank" rel="noopener">Stockage intersaisonier de chaleur</a></h3>
+      <div class="meta">👤 Anh Minh TANG <span class="badge">NAVIER</span> </div>
+      <div class="keywords">🗝️ Géothermie, transfert thermique, stockage</div>
+    </article>
+    
+    <article class="card" data-haystack="Création d’un produit innovant : de l’idée au MVP (produit minimum viable) | Charlotte ENGRAND | DRIPE | Innovation, Entrepreneuriat, Start-up | " data-lab="DRIPE" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EdyYXCQcrcNAsJM2gP3DdgsB3TcXLbrVhj5dWLLe_WGa8w?e=6zNwbr" target="_blank" rel="noopener">Création d’un produit innovant : de l’idée au MVP (produit minimum viable)</a></h3>
+      <div class="meta">👤 Charlotte ENGRAND <span class="badge">DRIPE</span> </div>
+      <div class="keywords">🗝️ Innovation, Entrepreneuriat, Start-up</div>
+    </article>
+    
+    <article class="card" data-haystack="Trucage photographique par inpainting | Pascal MONASSE | LIGM | traitement d’images, remplissage de zones manquantes | " data-lab="LIGM" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EfdoC8aJ1jJIvSnt_DVnjuUBvVB9ELxrzmq8HaoVdAkR7A?e=gpaaUx" target="_blank" rel="noopener">Trucage photographique par inpainting</a></h3>
+      <div class="meta">👤 Pascal MONASSE <span class="badge">LIGM</span> </div>
+      <div class="keywords">🗝️ traitement d’images, remplissage de zones manquantes</div>
+    </article>
+    
+    <article class="card" data-haystack="Détection de bords dans les images | Pascal MONASSE | LIGM | traitement d’images, bords, gradient, lignes de niveau, contraste | " data-lab="LIGM" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EcSgNXeB3mNEh0OkqWf892wBQmX3ZTCRGRGaEEKslWZ2zw?e=uR4QYd" target="_blank" rel="noopener">Détection de bords dans les images</a></h3>
+      <div class="meta">👤 Pascal MONASSE <span class="badge">LIGM</span> </div>
+      <div class="keywords">🗝️ traitement d’images, bords, gradient, lignes de niveau, contraste</div>
+    </article>
+    
+    <article class="card" data-haystack="Mise en perspective des Zones Climatiques Locales à l’aide  d’observations satellitaires | Pierre Antoine VERSINI | HM&amp;Co | îlots de chaleur, végétalisation, analyse multi-échelle | " data-lab="HM&amp;Co" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ERXmoaJ6cGpEhdWF9YKQrNcBqya5TozvCjKvVvHeE-v7VQ?e=We0zp8" target="_blank" rel="noopener">Mise en perspective des Zones Climatiques Locales à l’aide  d’observations satellitaires</a></h3>
+      <div class="meta">👤 Pierre Antoine VERSINI <span class="badge">HM&amp;Co</span> </div>
+      <div class="keywords">🗝️ îlots de chaleur, végétalisation, analyse multi-échelle</div>
+    </article>
+    
+    <article class="card" data-haystack="OPTIMISATION D’UN MIX ENERGETIQUE | Pierre Cyril AUBIN | CERMICS | optimisation (continue avec contraintes), mix énergétique, décision intertemporelle | " data-lab="CERMICS" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ES889nZu8t9DtmSjFK8LpoYBuVhWfjE4Di3Jt5mMzuoYpA?e=33lc8g" target="_blank" rel="noopener">OPTIMISATION D’UN MIX ENERGETIQUE</a></h3>
+      <div class="meta">👤 Pierre Cyril AUBIN <span class="badge">CERMICS</span> </div>
+      <div class="keywords">🗝️ optimisation (continue avec contraintes), mix énergétique, décision intertemporelle</div>
+    </article>
+    
+    <article class="card" data-haystack="OPTIMISATION POUR LA RENOVATION URBAINE | Pierre Cyril AUBIN | CERMICS | optimisation (mixte-entier, Bellman), rénovation urbaine, décision intertemporelle | " data-lab="CERMICS" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EYKeji3d849KhTY-4ccae1UB0Hz87SunAI8ybpE2cc1dEw?e=47amZ0" target="_blank" rel="noopener">OPTIMISATION POUR LA RENOVATION URBAINE</a></h3>
+      <div class="meta">👤 Pierre Cyril AUBIN <span class="badge">CERMICS</span> </div>
+      <div class="keywords">🗝️ optimisation (mixte-entier, Bellman), rénovation urbaine, décision intertemporelle</div>
+    </article>
+    
+    <article class="card" data-haystack="Coût, carbone et performance une métrique intégrée pour les bétons bas carbone | Rachida IDIR | MCD |  | " data-lab="MCD" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ETxyRnJJOmJItf14zGum_90BP2RQn2AfnSU-9tAsJngcNA?e=NmUwon" target="_blank" rel="noopener">Coût, carbone et performance une métrique intégrée pour les bétons bas carbone</a></h3>
+      <div class="meta">👤 Rachida IDIR <span class="badge">MCD</span> </div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Gestion et évaluation environnementale des matériaux critiques dans l&#x27;industrie pharmaceutique : vers une économie circulaire | Rachida IDIR | MCD |  | " data-lab="MCD" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EWrwQD1zbKtLnapFaOw-gdoBWMMYHM1hItFTj12rm6PB5g?e=ab5Lbs" target="_blank" rel="noopener">Gestion et évaluation environnementale des matériaux critiques dans l&#x27;industrie pharmaceutique : vers une économie circulaire</a></h3>
+      <div class="meta">👤 Rachida IDIR <span class="badge">MCD</span> </div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Gestion du verre issu du recyclage dans une économie circulaire | Rachida IDIR | MCD |  | " data-lab="MCD" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EZrzo1V17rZApP87Wi7jxhIBWGtJLpIfYHP2_oiRnksoFQ?e=WcLFw4" target="_blank" rel="noopener">Gestion du verre issu du recyclage dans une économie circulaire</a></h3>
+      <div class="meta">👤 Rachida IDIR <span class="badge">MCD</span> </div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Étude de la robustesse des méthodes de calcul d’indicateurs environnementaux - étude de cas sur le laitier de haut-fourneau | Rachida IDIR | MCD |  | " data-lab="MCD" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ERch9oslzp9Pi_RRUzNG7EIB7XDz2ya-F6q3YLs76312Lg?e=vHcLVY" target="_blank" rel="noopener">Étude de la robustesse des méthodes de calcul d’indicateurs environnementaux - étude de cas sur le laitier de haut-fourneau</a></h3>
+      <div class="meta">👤 Rachida IDIR <span class="badge">MCD</span> </div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Matériaux naturels et durabilité : Exploration de leur potentiel par RMN | Rahima SIDI BOULENOUAR | NAVIER | Matériaux naturels, RMN, porosité, transfert hydrique, évaluation thermique | " data-lab="NAVIER" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ES76a4QlDeVAiihH_vaSxeQBhcGTKtPwyOOmT6Ko4ZV0nQ?e=eeoOCd" target="_blank" rel="noopener">Matériaux naturels et durabilité : Exploration de leur potentiel par RMN</a></h3>
+      <div class="meta">👤 Rahima SIDI BOULENOUAR <span class="badge">NAVIER</span> </div>
+      <div class="keywords">🗝️ Matériaux naturels, RMN, porosité, transfert hydrique, évaluation thermique</div>
+    </article>
+    
+    <article class="card" data-haystack="COMPORTEMENT THERMOMECANIQUE D’UN RAIL DE LA SNCF | Kévin LIPPERA | DotBlocks | Thermique, Rail, Transport, Modélisation, Simulation numérique | " data-lab="DotBlocks" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EZq4Ll-9F5dCvJz7umg7WlQBbeYtOJEbIwkeWz7yLSFY0w?e=Ipj5cZ" target="_blank" rel="noopener">COMPORTEMENT THERMOMECANIQUE D’UN RAIL DE LA SNCF</a></h3>
+      <div class="meta">👤 Kévin LIPPERA <span class="badge">DotBlocks</span> </div>
+      <div class="keywords">🗝️ Thermique, Rail, Transport, Modélisation, Simulation numérique</div>
+    </article>
+    
+    <article class="card" data-haystack="Baignade en Seine : analyse spectrale de signaux de la qualité microbiologique de l’eau | Arthur GUILLOT LEGOFF | LEESU/LHSV | Qualité de l’eau ; Analyse spectrale ; Baignade urbaine ; Suivi environnemental | " data-lab="LEESU/LHSV" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ee92s5PRbxNNgO8YmWB05sEB5rFRqZbXobKoi-1_Q-MbCA?e=79LMJy" target="_blank" rel="noopener">Baignade en Seine : analyse spectrale de signaux de la qualité microbiologique de l’eau</a></h3>
+      <div class="meta">👤 Arthur GUILLOT LEGOFF <span class="badge">LEESU/LHSV</span> </div>
+      <div class="keywords">🗝️ Qualité de l’eau ; Analyse spectrale ; Baignade urbaine ; Suivi environnemental</div>
+    </article>
+    
+    <article class="card" data-haystack="Machine Learning et dynamique moléculaire | Jean-Baptiste HIMBERT | CERMICS | Machine learning, physique statistique, métastabilité | " data-lab="CERMICS" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EeS-7lxCF5xHi8klfNWNu1MB_VXrdqpn-SYPRJyZ-Nhk-g?e=uwz8Jf" target="_blank" rel="noopener">Machine Learning et dynamique moléculaire</a></h3>
+      <div class="meta">👤 Jean-Baptiste HIMBERT <span class="badge">CERMICS</span> </div>
+      <div class="keywords">🗝️ Machine learning, physique statistique, métastabilité</div>
+    </article>
+    
+    <article class="card" data-haystack="Modélisation mathématique du trafic routier | Nail BALOUL | CERMICS | Equations différentielles, Trafic routier, Modélisation, Optimisation, Simulation, Machine Learning, Réseaux de neurones | " data-lab="CERMICS" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:u:/g/personal/christos_papoutsellis_enpc_fr/EbZJW4WE-kNEjD7hka1z070B7vsf1y7oOXHhp4lf5k-IfA?e=GuepZt" target="_blank" rel="noopener">Modélisation mathématique du trafic routier</a></h3>
+      <div class="meta">👤 Nail BALOUL <span class="badge">CERMICS</span> </div>
+      <div class="keywords">🗝️ Equations différentielles, Trafic routier, Modélisation, Optimisation, Simulation, Machine Learning, Réseaux de neurones</div>
+    </article>
+    
+    <article class="card" data-haystack="ANALYSE DES DONNÉES DE CREUSEMENT DE TUNNELS | Lina Maria GUAYACAN CARRILLO | Navier | tunnel, tassements, statistiques, visualisation, machine learning | " data-lab="Navier" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/Edf2Bo_S4fJKkw0HTzzstVsBlvZNwZuuIEdWOS3mGf2AUQ?e=evY8UI" target="_blank" rel="noopener">ANALYSE DES DONNÉES DE CREUSEMENT DE TUNNELS</a></h3>
+      <div class="meta">👤 Lina Maria GUAYACAN CARRILLO <span class="badge">Navier</span> </div>
+      <div class="keywords">🗝️ tunnel, tassements, statistiques, visualisation, machine learning</div>
+    </article>
+    
+    <article class="card" data-haystack="SIMULATIONS NUMERIQUES  EN PHYSIQUE STATISTIQUE | Francois CHEVOIR | Navier |  | " data-lab="Navier" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EX2V5pe3-ihDpMiseOFxPp0BUzP9Mc23gOIDAbZbe0VFVg?e=8Ify03" target="_blank" rel="noopener">SIMULATIONS NUMERIQUES  EN PHYSIQUE STATISTIQUE</a></h3>
+      <div class="meta">👤 Francois CHEVOIR <span class="badge">Navier</span> </div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Dynamique de Langevin pour l’estimation bayésienne | Paul INVERNIZZI | CERMICS |  | " data-lab="CERMICS" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ecpn0kN42SdJp7p3PMAnZhgB8HWiOIiDrkH3d5ue0WXKvQ?e=ENcH5X" target="_blank" rel="noopener">Dynamique de Langevin pour l’estimation bayésienne</a></h3>
+      <div class="meta">👤 Paul INVERNIZZI <span class="badge">CERMICS</span> </div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Repenser l’affectation des enseignants : modélisation et simulation d’un mécanisme d’appariement dynamique | Charlotte MARTRES |  |  | PR" data-lab="" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EVPiWdk8qeVGj30myLL7mUEBkO_PS5gWpAgc00Izy2dBTA?e=Gi4tDk" target="_blank" rel="noopener">Repenser l’affectation des enseignants : modélisation et simulation d’un mécanisme d’appariement dynamique</a></h3>
+      <div class="meta">👤 Charlotte MARTRES  <span class="badge pr">PR</span></div>
+      
+    </article>
+    
+    <article class="card" data-haystack="Intégration des énergies renouvelables intermittentes dans le mix : impact prix et leviers d’actions publics | Maryeme KETTANI | EDF |  | " data-lab="EDF" data-pr="">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/EWPlYhxqjktKt4yhOi5wqgMBBYvbCyDfE9dB6lFsMXYUCQ?e=Md2gEq" target="_blank" rel="noopener">Intégration des énergies renouvelables intermittentes dans le mix : impact prix et leviers d’actions publics</a></h3>
+      <div class="meta">👤 Maryeme KETTANI <span class="badge">EDF</span> </div>
+      
+    </article>
+    
+    <article class="card" data-haystack="ARBRE DE PLUIE | Martin SEIDL | LEESU |  | PR" data-lab="LEESU" data-pr="PR">
+      <h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/EW0jshCiHTZHugW8uPLclZEBw8jh-VYWY8ekgCVnlDNYZQ?e=IqBwnU" target="_blank" rel="noopener">ARBRE DE PLUIE</a></h3>
+      <div class="meta">👤 Martin SEIDL <span class="badge">LEESU</span> <span class="badge pr">PR</span></div>
+      
+    </article>
+    
+    </section>
+  </main>
+  <footer class="footer">
+    Liens extraits des hyperliens de « Titre du projet » (intègre aussi les formules =HYPERLINK). PR filtrable.
+  </footer>
+<script>
+function normalize(s){return (s||'').toLowerCase()}
+function filterCards(){
+  const q = normalize(document.getElementById('search').value);
+  const lab = normalize(document.getElementById('lab').value);
+  const pr = document.getElementById('pr').value; // '', 'PR', 'NONPR'
+  const cards = document.querySelectorAll('.card');
+  let shown = 0;
+  cards.forEach(c=>{
+    const hay = normalize(c.dataset.haystack);
+    const labv = normalize(c.dataset.lab);
+    const hasPR = c.dataset.pr === 'PR';
+    let okPR = true;
+    if(pr === 'PR') okPR = hasPR;
+    else if(pr === 'NONPR') okPR = !hasPR;
+    const okQ = !q || hay.includes(q);
+    const okLab = !lab || labv===lab;
+    const show = okQ && okLab && okPR;
+    c.style.display = show ? '' : 'none';
+    if(show) shown++;
+  });
+  document.getElementById('count').textContent = shown + ' projet(s)';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('search').addEventListener('input', filterCards);
+  document.getElementById('lab').addEventListener('change', filterCards);
+  document.getElementById('pr').addEventListener('change', filterCards);
+  filterCards();
+});
+</script>
+</body>
+</html>
