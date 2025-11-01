@@ -44,9 +44,31 @@ input[type="search"],select{padding:10px 12px;border:1px solid #ddd;border-radiu
 <option selected="selected" value="">Tous les parcours</option><option value="PR">PR parcours recherche</option><option value="PC">PC parcours classique</option><option value="PR ou PC">PR ou PC</option></select>
 <div class="count" id="count"></div>
 <div class="course-filter">
-<h4>Filtrer par cours recommandés</h4>
-<label><input name="course" type="checkbox" value="algorithmique et structures de donnees"/> Algorithmique et structures de données</label><label><input name="course" type="checkbox" value="analyse 2"/> Analyse 2</label><label><input name="course" type="checkbox" value="c++a"/> C++A</label><label><input name="course" type="checkbox" value="c++b"/> C++B</label><label><input name="course" type="checkbox" value="decision dans l'incertain"/> Décision dans l’incertain</label><label><input name="course" type="checkbox" value="du micron au metre : a la decouverte de l'heterogeneite"/> Du micron au mètre : à la découverte de l’hétérogénéité</label><label><input name="course" type="checkbox" value="edp : approche variationnelle"/> EDP : approche variationnelle</label><label><input name="course" type="checkbox" value="environnement - developpement durable"/> Environnement - développement durable</label><label><input name="course" type="checkbox" value="geomecanique et energie"/> Géomécanique et énergie</label><label><input name="course" type="checkbox" value="introduction a la mecanique lagrangienne"/> Introduction à la mécanique lagrangienne</label><label><input name="course" type="checkbox" value="introduction au calcul economique"/> Introduction au calcul économique</label><label><input name="course" type="checkbox" value="introduction aux sciences des donnees"/> Introduction aux sciences des données</label><label><input name="course" type="checkbox" value="mecanique des fluides"/> Mécanique des fluides</label><label><input name="course" type="checkbox" value="mecanique des milieux continus : milieux curvilignes"/> Mécanique des milieux continus : milieux curvilignes</label><label><input name="course" type="checkbox" value="modeles mathematiques pour la geographie"/> Modèles mathématiques pour la géographie</label><label><input name="course" type="checkbox" value="physico-chimie des etats de la matiere"/> Physico-chimie des états de la matière</label><label><input name="course" type="checkbox" value="physicochimie des etats de la matiere"/> Physicochimie des états de la matière</label><label><input name="course" type="checkbox" value="physique du sport"/> Physique du sport</label><label><input name="course" type="checkbox" value="physique statistique"/> Physique statistique</label><label><input name="course" type="checkbox" value="pratique du calcul scientifique"/> Pratique du calcul scientifique</label><label><input name="course" type="checkbox" value="recherche operationnelle et transport"/> Recherche opérationnelle et transport</label><label><input name="course" type="checkbox" value="rheologie de l'ingenieur"/> Rhéologie de l'ingénieur</label></div>
-</div>
+  <select id="course" name="course" title="Filtrer par cours recommandés">
+    <option selected="selected" value="">Tous les cours</option>
+    <option value="algorithmique et structures de donnees">Algorithmique et structures de données</option>
+    <option value="analyse 2">Analyse 2</option>
+    <option value="c++a">C++A</option>
+    <option value="c++b">C++B</option>
+    <option value="decision dans l'incertain">Décision dans l’incertain</option>
+    <option value="du micron au metre : a la decouverte de l'heterogeneite">Du micron au mètre : à la découverte de l’hétérogénéité</option>
+    <option value="edp : approche variationnelle">EDP : approche variationnelle</option>
+    <option value="environnement - developpement durable">Environnement - développement durable</option>
+    <option value="geomecanique et energie">Géomécanique et énergie</option>
+    <option value="introduction a la mecanique lagrangienne">Introduction à la mécanique lagrangienne</option>
+    <option value="introduction au calcul economique">Introduction au calcul économique</option>
+    <option value="introduction aux sciences des donnees">Introduction aux sciences des données</option>
+    <option value="mecanique des fluides">Mécanique des fluides</option>
+    <option value="mecanique des milieux continus : milieux curvilignes">Mécanique des milieux continus : milieux curvilignes</option>
+    <option value="modeles mathematiques pour la geographie">Modèles mathématiques pour la géographie</option>
+    <option value="physico-chimie des etats de la matiere">Physico-chimie des états de la matière</option>
+    <option value="physicochimie des etats de la matiere">Physicochimie des états de la matière</option>
+    <option value="physique du sport">Physique du sport</option>
+    <option value="physique statistique">Physique statistique</option>
+    <option value="pratique du calcul scientifique">Pratique du calcul scientifique</option>
+    <option value="recherche operationnelle et transport">Recherche opérationnelle et transport</option>
+    <option value="rheologie de l'ingenieur">Rhéologie de l'ingénieur</option>
+  </select>
 </div>
 </header>
 <main class="container">
