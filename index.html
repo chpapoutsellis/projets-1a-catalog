@@ -44,33 +44,33 @@ input[type="search"],select{padding:10px 12px;border:1px solid #ddd;border-radiu
 <option selected="selected" value="">Tous les parcours</option><option value="PR">PR parcours recherche</option><option value="PC">PC parcours classique</option><option value="PR ou PC">PR ou PC</option></select>
 <div class="count" id="count"></div>
 <div class="course-filter">
-  <select id="course" name="course" title="Filtrer par cours recommandés">
-    <option selected="selected" value="">Tous les cours</option>
-    <option value="algorithmique et structures de donnees">Algorithmique et structures de données</option>
-    <option value="analyse 2">Analyse 2</option>
-    <option value="c++a">C++A</option>
-    <option value="c++b">C++B</option>
-    <option value="decision dans l'incertain">Décision dans l’incertain</option>
-    <option value="du micron au metre : a la decouverte de l'heterogeneite">Du micron au mètre : à la découverte de l’hétérogénéité</option>
-    <option value="edp : approche variationnelle">EDP : approche variationnelle</option>
-    <option value="environnement - developpement durable">Environnement - développement durable</option>
-    <option value="geomecanique et energie">Géomécanique et énergie</option>
-    <option value="introduction a la mecanique lagrangienne">Introduction à la mécanique lagrangienne</option>
-    <option value="introduction au calcul economique">Introduction au calcul économique</option>
-    <option value="introduction aux sciences des donnees">Introduction aux sciences des données</option>
-    <option value="mecanique des fluides">Mécanique des fluides</option>
-    <option value="mecanique des milieux continus : milieux curvilignes">Mécanique des milieux continus : milieux curvilignes</option>
-    <option value="modeles mathematiques pour la geographie">Modèles mathématiques pour la géographie</option>
-    <option value="physico-chimie des etats de la matiere">Physico-chimie des états de la matière</option>
-    <option value="physicochimie des etats de la matiere">Physicochimie des états de la matière</option>
-    <option value="physique du sport">Physique du sport</option>
-    <option value="physique statistique">Physique statistique</option>
-    <option value="pratique du calcul scientifique">Pratique du calcul scientifique</option>
-    <option value="recherche operationnelle et transport">Recherche opérationnelle et transport</option>
-    <option value="rheologie de l'ingenieur">Rhéologie de l'ingénieur</option>
-  </select>
+<select id="course" name="course" title="Filtrer par cours recommandés">
+<option selected="selected" value="">Tous les cours</option>
+<option value="algorithmique et structures de donnees">Algorithmique et structures de données</option>
+<option value="analyse 2">Analyse 2</option>
+<option value="c++a">C++A</option>
+<option value="c++b">C++B</option>
+<option value="decision dans l'incertain">Décision dans l’incertain</option>
+<option value="du micron au metre : a la decouverte de l'heterogeneite">Du micron au mètre : à la découverte de l’hétérogénéité</option>
+<option value="edp : approche variationnelle">EDP : approche variationnelle</option>
+<option value="environnement - developpement durable">Environnement - développement durable</option>
+<option value="geomecanique et energie">Géomécanique et énergie</option>
+<option value="introduction a la mecanique lagrangienne">Introduction à la mécanique lagrangienne</option>
+<option value="introduction au calcul economique">Introduction au calcul économique</option>
+<option value="introduction aux sciences des donnees">Introduction aux sciences des données</option>
+<option value="mecanique des fluides">Mécanique des fluides</option>
+<option value="mecanique des milieux continus : milieux curvilignes">Mécanique des milieux continus : milieux curvilignes</option>
+<option value="modeles mathematiques pour la geographie">Modèles mathématiques pour la géographie</option>
+<option value="physico-chimie des etats de la matiere">Physico-chimie des états de la matière</option>
+<option value="physicochimie des etats de la matiere">Physicochimie des états de la matière</option>
+<option value="physique du sport">Physique du sport</option>
+<option value="physique statistique">Physique statistique</option>
+<option value="pratique du calcul scientifique">Pratique du calcul scientifique</option>
+<option value="recherche operationnelle et transport">Recherche opérationnelle et transport</option>
+<option value="rheologie de l'ingenieur">Rhéologie de l'ingénieur</option>
+</select>
 </div>
-</header>
+</div></div></header>
 <main class="container">
 <section class="grid">
 <article class="card" data-courses="Pratique du calcul scientifique||Mécanique des fluides" data-haystack="OVERTOPPING : Étude expérimental de systèmes anti-franchissement dans un canal à houle | REMI CARMIGNIANI | LHSV | Mécanique des fluides, Expérimental, Vagues, Capteurs | Pratique du calcul scientifique ; Mécanique des fluides | PR | remi.carmigniani@enpc.fr" data-lab="lhsv" data-track="PR">
@@ -660,5 +660,83 @@ document.addEventListener('DOMContentLoaded',()=>{
   filterCards();
 });
 </script>
-</body>
+<script>
+(function(){
+  function norm(s){
+    if(!s) return "";
+    return s.toString()
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'') // strip accents
+      .replace(/[“”«»]/g,'"')
+      .replace(/[’]/g,"'")
+      .replace(/\s+/g,' ')
+      .trim();
+  }
+
+  function applyFilters(){
+    var q = norm(document.getElementById('search') ? document.getElementById('search').value : '');
+    var labSel   = document.getElementById('lab');
+    var trackSel = document.getElementById('track');
+    var courseSel= document.getElementById('course');
+
+    var labVal    = labSel   ? norm(labSel.value)   : '';
+    var trackVal  = trackSel ? (trackSel.value || '') : '';
+    var courseVal = courseSel? norm(courseSel.value): '';
+
+    var cards = Array.from(document.querySelectorAll('.card'));
+    var shown = 0;
+    cards.forEach(function(card){
+      // text filter
+      var hay = norm(card.getAttribute('data-haystack') || '');
+      var textOK = !q || hay.indexOf(q) !== -1;
+
+      // lab filter
+      var lab = norm(card.getAttribute('data-lab') || '');
+      var labOK = !labVal || lab === labVal;
+
+      // track filter
+      var track = (card.getAttribute('data-track') || '');
+      var trackOK = !trackVal || track === trackVal;
+
+      // course filter (data-courses: 'A||B||C')
+      var coursesRaw = card.getAttribute('data-courses') || '';
+      var coursesList = coursesRaw.split('||').map(norm).filter(Boolean);
+      var courseOK = !courseVal || coursesList.some(function(c){
+        return c === courseVal || c.indexOf(courseVal) !== -1;
+      });
+
+      var ok = textOK && labOK && trackOK && courseOK;
+      card.style.display = ok ? '' : 'none';
+      if(ok) shown++;
+    });
+
+    var cnt = document.getElementById('count');
+    if(cnt){ cnt.textContent = shown + ' projet' + (shown>1?'s':''); }
+  }
+
+  function hook(){
+    var search = document.getElementById('search');
+    if(search){ search.addEventListener('input', applyFilters); }
+
+    ['lab','track','course'].forEach(function(id){
+      var sel = document.getElementById(id);
+      if(sel){ sel.addEventListener('change', applyFilters); }
+    });
+
+    // Default state: no filter selected => show all
+    var track = document.getElementById('track');
+    if(track){ track.value = ''; }
+    var lab = document.getElementById('lab');
+    if(lab){ lab.value = ''; }
+    var course = document.getElementById('course');
+    if(course){ course.value = ''; }
+
+    applyFilters();
+  }
+
+  if(document.readyState !== 'loading') hook();
+  document.addEventListener('DOMContentLoaded', hook);
+  window.applyFilters = applyFilters;
+})();
+</script></body>
 </html>
