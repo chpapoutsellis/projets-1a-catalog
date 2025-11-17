@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><style>
+
+/* Restored card styles from original */
+
+*{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;margin:0;background:#f7f7fb;color:#111}
+.header{position:sticky;top:0;z-index:50;background:#ffffffcc;backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #eee}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+h1{font-size:28px;margin:0 0 10px}
+.controls{display:grid;grid-template-columns:1fr 220px 260px;gap:12px;align-items:start;margin:8px 0 16px}
+.controls .stack{display:flex;gap:8px;align-items:center}
+input[type="search"],select{padding:10px 12px;border:1px solid #ddd;border-radius:10px;font-size:14px;background:#fff}
+.course-filter{background:#fff;border:1px solid #e6e6ef;border-radius:12px;padding:10px;max-height:160px;overflow:auto}
+.course-filter h4{margin:0 0 6px;font-size:13px;color:#333}
+.course-filter label{display:block;font-size:13px;margin:4px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;padding:20px 0}
+.card{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.card h3{margin:0 0 8px;font-size:18px;line-height:1.2}
+.card h3 a{text-decoration:none;color:#0a58ca}
+.card h3 a:hover{text-decoration:underline}
+.meta{font-size:13px;color:#444;margin:6px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{display:inline-block;font-size:11px;padding:4px 10px;border-radius:999px;background:#eef;border:1px solid #dde;color:#334}
+.badge.pr{background:#ffe6c7;border-color:#f4c690;color:#8b5a00}
+.badge.pc{background:#e7fff0;border-color:#bde8c9;color:#0b6a34}
+.badge.lab{background:#eef4ff;border-color:#d8e5ff;color:#223}
+.keywords,.courses{font-size:13px;margin-top:6px}
+.tag{display:inline-block;margin:4px 6px 0 0;padding:4px 8px;border-radius:999px;background:#eef4ff;border:1px solid #d8e5ff}
+.count{font-size:12px;color:#666;margin-left:auto;align-self:center}
+.footer{color:#777;font-size:12px;text-align:center;padding:20px}
+</style><style>
+/* Inline filter controls: Parcours + Cours side-by-side */
+#track, #course {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: .6rem;
+  max-width: 100%;
+  appearance: auto;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+  background-image: none;
+  padding-right: 2.2rem; /* leave space for native arrow */
+  box-sizing: border-box;
+}
+/* Keep on one line if space allows, wrap gracefully on small screens */
+#track + #course { margin-left: 0; }
+@media (max-width: 640px) {
+  #track, #course { width: 100%; margin-right: 0; }
+}
+</style></head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Projets 1A — Catalogue (filtres + cours recommandés)</title>
+<body>
+<header class="header">
+<div class="container">
+<h1>Projets 1A — Catalogue</h1>
+<div class="controls">
+<input id="search" placeholder="Rechercher (titre, encadrant, laboratoire, mots-clés)…" type="search"/>
+<select id="lab">
+<option value="">Tous les labos</option>
+<option value="cermics">CERMICS</option><option value="cstb">CSTB</option><option value="cosys / grettia - université gustave eiffel - marne-la-vallée">Cosys / Grettia - Université Gustave Eiffel - Marne-la-Vallée</option><option value="dripe">DRIPE</option><option value="dotblocks">DotBlocks</option><option value="edf">EDF</option><option value="enpc">ENPC</option><option value="hm&amp;co">HM&amp;Co</option><option value="iusti - umr 7343 cnrs - aix marseille université">IUSTI - UMR 7343 CNRS - Aix Marseille Université</option><option value="leesu">LEESU</option><option value="leesu/lhsv">LEESU/LHSV</option><option value="leesu; lvmt">LEESU; LVMT</option><option value="lhs, enpc et uge">LHS, ENPC et UGE</option><option value="lhsv">LHSV</option><option value="ligm">LIGM</option><option value="lvmt">LVMT</option><option value="laboratoire navier">Laboratoire Navier</option><option value="mcd">MCD</option><option value="navier">NAVIER</option><option value="navier">Navier</option><option value="d.school paris - département de design et d'innovation">d.school Paris - département de Design et d'Innovation</option><option value="setec international">setec international</option>
+</select>
+<select id="track" title="Parcours">
+<option selected="selected" value="">Tous les parcours</option><option value="PR">PR parcours recherche</option><option value="PC">PC parcours classique</option><option value="PR ou PC">PR ou PC</option></select><select id="course" name="course" title="Filtrer par cours recommandés">
+<option selected="selected" value="">Tous les cours</option>
+<option value="algorithmique et structures de donnees">Algorithmique et structures de données</option>
+<option value="analyse 2">Analyse 2</option>
+<option value="c++a">C++A</option>
+<option value="c++b">C++B</option>
+<option value="decision dans l'incertain">Décision dans l’incertain</option>
+<option value="du micron au metre : a la decouverte de l'heterogeneite">Du micron au mètre : à la découverte de l’hétérogénéité</option>
+<option value="edp : approche variationnelle">EDP : approche variationnelle</option>
+<option value="environnement - developpement durable">Environnement - développement durable</option>
+<option value="geomecanique et energie">Géomécanique et énergie</option>
+<option value="introduction a la mecanique lagrangienne">Introduction à la mécanique lagrangienne</option>
+<option value="introduction au calcul economique">Introduction au calcul économique</option>
+<option value="introduction aux sciences des donnees">Introduction aux sciences des données</option>
+<option value="mecanique des fluides">Mécanique des fluides</option>
+<option value="mecanique des milieux continus : milieux curvilignes">Mécanique des milieux continus : milieux curvilignes</option>
+<option value="modeles mathematiques pour la geographie">Modèles mathématiques pour la géographie</option>
+<option value="physico-chimie des etats de la matiere">Physico-chimie des états de la matière</option>
+<option value="physicochimie des etats de la matiere">Physicochimie des états de la matière</option>
+<option value="physique du sport">Physique du sport</option>
+<option value="physique statistique">Physique statistique</option>
+<option value="pratique du calcul scientifique">Pratique du calcul scientifique</option>
+<option value="recherche operationnelle et transport">Recherche opérationnelle et transport</option>
+<option value="rheologie de l'ingenieur">Rhéologie de l'ingénieur</option>
+</select>
+<div class="count" id="count"></div>
+</div></div></header>
+<main class="container">
+<section class="grid">
+<article class="card" data-courses="Introduction à la mécanique lagrangienne||Pratique du calcul scientifique||C++A||Physique du sport" data-haystack="ETUDE AERODYNAMIQUE DE PROJECTILES SPORTIFS : LE JAVELOT | REMI CARMIGNIANI | LHS, ENPC et UGE | Aérodynamique, projectile sportif, javelot | Introduction à la mécanique lagrangienne ; Pratique du calcul scientifique ; C++A ; Physique du sport | PR | remi.carmigniani@enpc.fr" data-lab="lhs, enpc et uge" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ed04w9NnTpBDoHaynWIAD5UBfD3FMhvYCmlTCsTu8hvf9Q" rel="noopener" target="_blank">ETUDE AERODYNAMIQUE DE PROJECTILES SPORTIFS : LE JAVELOT</a></h3>
+<div class="meta">
+        👤 REMI CARMIGNIANI
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LHS, ENPC et UGE</span>  |  📧 <a href="mailto:remi.carmigniani@enpc.fr">remi.carmigniani@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Aérodynamique, projectile sportif, javelot</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Introduction à la mécanique lagrangienne</span> <span class="tag">Pratique du calcul scientifique</span> <span class="tag">C++A</span> <span class="tag">Physique du sport</span></div>
+</article>
+<article class="card" data-courses="Algorithmique et structures de données||Décision dans l’incertain" data-haystack="Safe Reinforcement Learning et Applications à la Conduite Autonome. | Nadir FARHI | Cosys / Grettia - Université Gustave Eiffel - Marne-la-Vallée | Apprentissage par renforcement, Conduite autonome, mobilité urbaine. | Algorithmique et structures de données ; Décision dans l’incertain | PR | nadir.farhi@enpc.fr" data-lab="cosys / grettia - université gustave eiffel - marne-la-vallée" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ecj16_pZN5dJtN76kUoiuhIBtvWIWMx_IhXvmmAwceBP4w" rel="noopener" target="_blank">Safe Reinforcement Learning et Applications à la Conduite Autonome.</a></h3>
+<div class="meta">
+        👤 Nadir FARHI
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">Cosys / Grettia - Université Gustave Eiffel - Marne-la-Vallée</span>  |  📧 <a href="mailto:nadir.farhi@enpc.fr">nadir.farhi@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Apprentissage par renforcement, Conduite autonome, mobilité urbaine.</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Algorithmique et structures de données</span> <span class="tag">Décision dans l’incertain</span></div>
+</article>
+<article class="card" data-courses="Modèles mathématiques pour la géographie" data-haystack="Modéliser un épisode de la Grande Peur (1789) : processus de diffusion sur les réseaux, modèles de percolation et modèles épidémiologiques | Olivier BONIN | LVMT | modèles épidémiologiques, diffusion sur les réseaux, percolation, modélisation numérique | Modèles mathématiques pour la géographie | PR | olivier.bonin@enpc.fr" data-lab="lvmt" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EerCJOWvoDxGi5_gMiwhWl0Bu8MYSXKAqEQLV_RapP5t3A" rel="noopener" target="_blank">Modéliser un épisode de la Grande Peur (1789) : processus de diffusion sur les réseaux, modèles de percolation et modèles épidémiologiques</a></h3>
+<div class="meta">
+        👤 Olivier BONIN
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LVMT</span>  |  📧 <a href="mailto:olivier.bonin@enpc.fr">olivier.bonin@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ modèles épidémiologiques, diffusion sur les réseaux, percolation, modélisation numérique</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Modèles mathématiques pour la géographie</span></div>
+</article>
+<article class="card" data-courses="" data-haystack="Modélisation du bilan hydrique des sols et projection des risques de retrait-gonflement des argiles en contexte de changement climatique | Carl TIXIER | Navier | changement climatique, retrait-gonflement des argiles, modélisation | PR | carl.tixier@enpc.fr" data-lab="navier" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ESKOrNGhrARAnjpeA-2TlfgBHsdL9ZGS8ipArsNeZLMF0A?e=rtcACZ" rel="noopener" target="_blank">Modélisation du bilan hydrique des sols et projection des risques de retrait-gonflement des argiles en contexte de changement climatique</a></h3>
+<div class="meta">
+        👤 Carl TIXIER
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">Navier</span>  |  📧 <a href="mailto:carl.tixier@enpc.fr">carl.tixier@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ changement climatique, retrait-gonflement des argiles, modélisation</div>
+</article>
+<article class="card" data-courses="Géomécanique et énergie" data-haystack="CTSC : Captage, Transport et Stockage géologique du CO2 | SIAVASH GHABEZLOO | Laboratoire Navier | Stockage géologique du CO2, Mécanique des milieux poreux | Géomécanique et énergie | PR | siavash.ghabezloo@enpc.fr" data-lab="laboratoire navier" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ecbt7RYW8qFOoQ9rd2daMHQB_NrEYSpx6ucdyFxyJEERIw?e=WUjy9s" rel="noopener" target="_blank">CTSC : Captage, Transport et Stockage géologique du CO2</a></h3>
+<div class="meta">
+        👤 SIAVASH GHABEZLOO
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">Laboratoire Navier</span>  |  📧 <a href="mailto:siavash.ghabezloo@enpc.fr">siavash.ghabezloo@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Stockage géologique du CO2, Mécanique des milieux poreux</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Géomécanique et énergie</span></div>
+</article>
+<article class="card" data-courses="Programmation en Python||Bases scientifiques pour la transition énergétique||Introduction aux sciences des données" data-haystack="Détection d’ensembles urbains homogènes pour la rénovation énergétique des bâtiments | Thomas BERTHOU | CSTB | data-science, urbanisme, décarbonation des bâtiments | PR | Thomas.BERTHOU@cstb.fr" data-lab="cstb" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EdblF_Zmu1NDoQmINQTDyyUBq1J1d9rYjTKiZQrt1Yux_Q?e=fIMl0b" rel="noopener" target="_blank">Détection d’ensembles urbains homogènes pour la rénovation énergétique des bâtiments</a></h3>
+<div class="meta">
+        👤 Thomas BERTHOU
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CSTB</span>  |  📧 <a href="mailto:Thomas.BERTHOU@cstb.fr">Thomas.BERTHOU@cstb.fr</a>
+</div>
+<div class="keywords">🗝️ data-science, urbanisme, décarbonation des bâtiments</div>
+</article>
+<article class="card" data-courses="Analyse 2||EDP – Approche variationnelle" data-haystack="Réduction de modèle : Proper Orthogonal Decomposition (POD) et méthode des bases réduites | Sofiane EZZEHI | CERMICS | Réduction de modèle, Équation aux dérivées partielles, Formulation variationnelle | Analyse 2 | PR | sofiane.ezzehi@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ETst9WX9Z6FBvR1VvQfwB4QBX4Bo4yKNGK-wUrLFgJztPA?e=eSq8jN" rel="noopener" target="_blank">Réduction de modèle : Proper Orthogonal Decomposition (POD) et méthode des bases réduites</a></h3>
+<div class="meta">
+        👤 Sofiane EZZEHI
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:sofiane.ezzehi@enpc.fr">sofiane.ezzehi@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Réduction de modèle, Équation aux dérivées partielles, Formulation variationnelle</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Analyse 2</span> <span class="tag">EDP – Approche variationnelle</span></div>
+</article>
+<article class="card" data-courses="Analyse 2||EDP – Approche variationnelle" data-haystack="Réseaux de neurones pour la résolution d’équations aux dérivées partielles (EDP) | Sofiane EZZEHI | CERMICS | Réseaux de neurones, Équations aux dérivées partielles, Optimisation, formulation variationnelle | Analyse 2 | PR | sofiane.ezzehi@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ed8k1sjs1LdAo6Mzf-KEJJwBmjRcJcgqxsbjbVAYdXqNDg?e=7XNYbr" rel="noopener" target="_blank">Réseaux de neurones pour la résolution d’équations aux dérivées partielles (EDP)</a></h3>
+<div class="meta">
+        👤 Sofiane EZZEHI
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:sofiane.ezzehi@enpc.fr">sofiane.ezzehi@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Réseaux de neurones, Équations aux dérivées partielles, Optimisation, formulation variationnelle</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Analyse 2</span> <span class="tag">EDP – Approche variationnelle</span></div>
+</article>
+<article class="card" data-courses="Décision dans l'incertain||Recherche opérationnelle et transport" data-haystack="Régulation de systèmes de véhicules partagés | Rose SOSSOU EDOU | CERMICS | Recherche opérationnelle, véhicules partagés, algorithmie temps réel, simulation | Décision dans l'incertain ; Recherche opérationnelle et transport | PR | rose.sossou-edou@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EQepHh8rxSNLimx7QZTGxNEB2b0US3OvB2VA7GnPaYP_mQ?e=ZCDwC5" rel="noopener" target="_blank">Régulation de systèmes de véhicules partagés</a></h3>
+<div class="meta">
+        👤 Rose SOSSOU EDOU
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:rose.sossou-edou@enpc.fr">rose.sossou-edou@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Recherche opérationnelle, véhicules partagés, algorithmie temps réel, simulation</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Décision dans l'incertain</span> <span class="tag">Recherche opérationnelle et transport</span></div>
+</article>
+<article class="card" data-courses="" data-haystack="Calibration des modèles d’indice financier dont la volatilité dépend purement du chemin suivi par l’indice | Thibault JEANNIN | CERMICS | Déconvolution, Problème Inverse, Mathématiques Financières | PR | thibault.jeannin@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ea9thDLu8s5EuS0MzHPC7FcBn72_8ZjXkVKodQqSrURddQ?e=tsKvHG" rel="noopener" target="_blank">Calibration des modèles d’indice financier dont la volatilité dépend purement du chemin suivi par l’indice</a></h3>
+<div class="meta">
+        👤 Thibault JEANNIN
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:thibault.jeannin@enpc.fr">thibault.jeannin@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Déconvolution, Problème Inverse, Mathématiques Financières</div>
+</article>
+<article class="card" data-courses="Pratique du calcul scientifique||EDP : approche variationnelle||Introduction à la mécanique Lagrangienne||Mécanique des fluides" data-haystack="Modelisation mathematique des vagues cotieres | Christos PAPOUTSELLIS | LHSV | ondes de surface, EDP non-linéaires et dispersives, méthodes numériques | Pratique du calcul scientifique ; EDP : approche variationnelle ; Introduction à la mécanique Lagrangienne ; Mécanique des fluides | PR | christos.papoutsellis@enpc.fr" data-lab="lhsv" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Eemgb1dNAVtJqyCvUEmTnTYBh97SBrHxHoQSsdfG90EMNQ?e=3mnzjF" rel="noopener" target="_blank">Modelisation mathematique des vagues cotieres</a></h3>
+<div class="meta">
+        👤 Christos PAPOUTSELLIS
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LHSV</span>  |  📧 <a href="mailto:christos.papoutsellis@enpc.fr">christos.papoutsellis@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ ondes de surface, EDP non-linéaires et dispersives, méthodes numériques</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Pratique du calcul scientifique</span> <span class="tag">EDP : approche variationnelle</span> <span class="tag">Introduction à la mécanique Lagrangienne</span> <span class="tag">Mécanique des fluides</span></div>
+</article>
+<article class="card" data-courses="Analyse 2||Mathématiques pour la géographie" data-haystack="Capacité des villes à freiner la propagation d’ondes instationaires : approche par la simulation | Olivier BONIN | LVMT | modélisation numérique, équations de Saint-Venant, EDP, réseaux de neurone | Modèles mathématiques pour la géographie | PR | olivier.bonin@univ-eiffel.fr" data-lab="lvmt" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ed-JT0QOLPFKvcb023nHJSABjkGk5QW_-UFAw1YKfgdLeQ?e=AAJm0m" rel="noopener" target="_blank">Capacité des villes à freiner la propagation d’ondes instationaires : approche par la simulation</a></h3>
+<div class="meta">
+        👤 Olivier BONIN
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LVMT</span>  |  📧 <a href="mailto:olivier.bonin@univ-eiffel.fr">olivier.bonin@univ-eiffel.fr</a>
+</div>
+<div class="keywords">🗝️ modélisation numérique, équations de Saint-Venant, EDP, réseaux de neurone</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Analyse 2</span> <span class="tag">Mathématiques pour la géographie</span></div>
+</article>
+<article class="card" data-courses="Introduction aux sciences des données" data-haystack="Dynamique de Langevin pour l’estimation bayésienne | Paul INVERNIZZI | CERMICS | Étude Numérique, Probabilités, Statistique Bayesienne, Classification binaire | PR | paul.invernizzi@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ERjBsBeHOtJAiEhG-Os8THcBnyUL4e9DRhEoaXvIvQNoGQ?e=TXp6RJ" rel="noopener" target="_blank">Dynamique de Langevin pour l’estimation bayésienne</a></h3>
+<div class="meta">
+        👤 Paul INVERNIZZI
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:paul.invernizzi@enpc.fr">paul.invernizzi@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Étude Numérique, Probabilités, Statistique Bayesienne, Classification binaire</div>
+</article>
+<article class="card" data-courses="Mécanique quantique" data-haystack="Foundations of Quantum Chemistry: Manifold Structures in Wavefunction Methods and Density Functional Theory | Yukuan HU | CERMICS | Quantum Chemistry, Riemannian Optimization | PR | yukuan.hu@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EcNL6F9HI6pOhHnQWWEeWOwBo2JhjxXcFRoDyAKWXSCJEA?e=22M9Yv" rel="noopener" target="_blank">Foundations of Quantum Chemistry: Manifold Structures in Wavefunction Methods and Density Functional Theory</a></h3>
+<div class="meta">
+        👤 Yukuan HU
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:yukuan.hu@enpc.fr">yukuan.hu@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Quantum Chemistry, Riemannian Optimization</div>
+</article>
+<article class="card" data-courses="Modèles mathématiques pour la géographie||Algorithmique et structures de données||Introduction aux sciences des données" data-haystack="Modéliser la circularité de l’eau urbaine pour la résilience climatique | Yangzi QIU | LEESU; LVMT | Circularité de l’eau, Prototype numérique, Résilience urbaine | Modèles mathématiques pour la géographie ; Algorithmique et structures de données | PR | yangzi.qiu@enpc.fr" data-lab="leesu; lvmt" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EZH5gpOVu6NNotrHmNeoXKkBjRXdt2nh_eYkhin6eDbXkw?e=TviMFv" rel="noopener" target="_blank">Modéliser la circularité de l’eau urbaine pour la résilience climatique</a></h3>
+<div class="meta">
+        👤 Yangzi QIU
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LEESU; LVMT</span>  |  📧 <a href="mailto:yangzi.qiu@enpc.fr">yangzi.qiu@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Circularité de l’eau, Prototype numérique, Résilience urbaine</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Modèles mathématiques pour la géographie</span> <span class="tag">Algorithmique et structures de données</span> <span class="tag">Introduction aux sciences des données</span></div>
+</article>
+<article class="card" data-courses="Introduction aux sciences des données" data-haystack="Mesurer et modéliser la pollution dans le métro de Paris. Une approche avec des capteurs portatifs et du machine learning. | Laurent PROULHAC | LVMT | capteur portatif, machine learning, concentration, exposition, PM2.5, métro | PR | laurent.proulhac@enpc.fr" data-lab="lvmt" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ER_JhkxbPsBFojxQhf0MQSsBUI-vVnmFjxUDbzglnC_LZA?e=PPeiIR" rel="noopener" target="_blank">Mesurer et modéliser la pollution dans le métro de Paris. Une approche avec des capteurs portatifs et du machine learning.</a></h3>
+<div class="meta">
+        👤 Laurent PROULHAC
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LVMT</span>  |  📧 <a href="mailto:laurent.proulhac@enpc.fr">laurent.proulhac@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ capteur portatif, machine learning, concentration, exposition, PM2.5, métro</div>
+</article>
+<article class="card" data-courses="Analyse 2" data-haystack="Sur l’intérieur relatif des ensembles convexes compacts dans EVT | Lu YU | CERMICS | Convexité, topologie élémentaire, ETV, convex compact | Analyse 2 | PR | lu.yu@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ecpnm-KyojRFpayVolKAxxUBEl0Ea4mQgOANlkARfZN99Q?e=iKyk6P" rel="noopener" target="_blank">Sur l’intérieur relatif des ensembles convexes compacts dans EVT</a></h3>
+<div class="meta">
+        👤 Lu YU
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:lu.yu@enpc.fr">lu.yu@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Convexité, topologie élémentaire, ETV, convex compact</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Analyse 2</span></div>
+</article>
+<article class="card" data-courses="Innovations pour la transition socio-écologique" data-haystack="LA VILLE EN 2037 : Concevoir et débattre des futurs souhaitables | Klervie PENSEC | d.school Paris - département de Design et d'Innovation | prospective, design fiction, ville, futur souhaitable, innovation | PR | klervie.pensec@enpc.fr" data-lab="d.school paris - département de design et d'innovation" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ET-ZzmLC8RxOvfjnLhdfAXUBfSzx_DhhiNqMY34hNtP7eQ?e=Vz0ce9" rel="noopener" target="_blank">LA VILLE EN 2037 : Concevoir et débattre des futurs souhaitables</a></h3>
+<div class="meta">
+        👤 Klervie PENSEC
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">d.school Paris - département de Design et d'Innovation</span>  |  📧 <a href="mailto:klervie.pensec@enpc.fr">klervie.pensec@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ prospective, design fiction, ville, futur souhaitable, innovation</div>
+</article>
+<article class="card" data-courses="Introduction à la mécanique lagrangienne||Mécanique des milieux curvilignes" data-haystack="Amortissement passif des structures | Gwendal CUMUNEL | Navier | contrôle passif, amortisseur à masse accordée, optimisation | Introduction à la mécanique lagrangienne ; Mécanique des milieux continus : milieux curvilignes | PR | gwendal.cumunel@enpc.fr" data-lab="navier" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EXzObYNM21BFsQHkAYPH0Z4BJ1fV2jgrBKJyIhHrPxUIFQ?e=Suv2gR" rel="noopener" target="_blank">Amortissement passif des structures</a></h3>
+<div class="meta">
+        👤 Gwendal CUMUNEL
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">Navier</span>  |  📧 <a href="mailto:gwendal.cumunel@enpc.fr">gwendal.cumunel@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ contrôle passif, amortisseur à masse accordée, optimisation</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Introduction à la mécanique lagrangienne</span> <span class="tag">Mécanique des milieux curvilignes</span></div>
+</article>
+<article class="card" data-courses="Introduction aux sciences des données" data-haystack="Quantifier l’impact d’incidents sur le trafic routier | Nadia LE MOIGNE | setec international | traitement de données, trafic routier, débit, incident, accident, congestion, climat, vulnérabilité fonctionnelle, résilience des infrastructures, SIG | PR | nadia.le-moigne@enpc.fr" data-lab="setec international" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Eek1iZHziPhOsWJWcpFbIAkBs1uDXf2Ey8gnRX92iSVWpA?e=hpT7uT" rel="noopener" target="_blank">Quantifier l’impact d’incidents sur le trafic routier</a></h3>
+<div class="meta">
+        👤 Nadia LE MOIGNE
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">setec international</span>  |  📧 <a href="mailto:nadia.le-moigne@enpc.fr">nadia.le-moigne@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ traitement de données, trafic routier, débit, incident, accident, congestion, climat, vulnérabilité fonctionnelle, résilience des infrastructures, SIG</div>
+</article>
+<article class="card" data-courses="Mécanique des fluides||prototypage rapide" data-haystack="Mesure du vecteur vitesse aérodynamique d’un drone | Gilles BOUCHET | IUSTI - UMR 7343 CNRS - Aix Marseille Université | Aérodynamique, soufflerie, drone | Mécanique des fluides | PR | gilles.bouchet@enpc.fr" data-lab="iusti - umr 7343 cnrs - aix marseille université" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EQGyJLUJPwBDnVEuC1axQhsBbJZVcjvj0MWf9hmhX1JY_A?e=7vACsa" rel="noopener" target="_blank">Mesure du vecteur vitesse aérodynamique d’un drone</a></h3>
+<div class="meta">
+        👤 Gilles BOUCHET
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">IUSTI - UMR 7343 CNRS - Aix Marseille Université</span>  |  📧 <a href="mailto:gilles.bouchet@enpc.fr">gilles.bouchet@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Aérodynamique, soufflerie, drone</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Mécanique des fluides</span> <span class="tag">prototypage rapide</span></div>
+</article>
+<article class="card" data-courses="Mécanique des fluides||prototypage rapide" data-haystack="Conception d'un drone marin | Gilles BOUCHET | IUSTI - UMR 7343 CNRS - Aix Marseille Université | Aérodynamique, modélisation, conception, prototype rapide | Mécanique des fluides | PR | gilles.bouchet@enpc.fr" data-lab="iusti - umr 7343 cnrs - aix marseille université" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ET9jHrHJwutHh95uBZOjjMkBhc_jLIoX-fhNI0LyJcxC6A?e=ZUi0ZZ" rel="noopener" target="_blank">Conception d'un drone marin</a></h3>
+<div class="meta">
+        👤 Gilles BOUCHET
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">IUSTI - UMR 7343 CNRS - Aix Marseille Université</span>  |  📧 <a href="mailto:gilles.bouchet@enpc.fr">gilles.bouchet@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Aérodynamique, modélisation, conception, prototype rapide</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Mécanique des fluides</span> <span class="tag">prototypage rapide</span></div>
+</article>
+<article class="card" data-courses="Du micron au mètre : à la découverte de l’hétérogénéité||Géomécanique et énergie||Rhéologie de l’ingénieur : des matériaux entre fluide et solide" data-haystack="Stockage intersaisonier de chaleur | Anh Minh TANG | NAVIER | Géothermie, transfert thermique, stockage | Du micron au mètre : à la découverte de l’hétérogénéité ; Géomécanique et énergie ; Rhéologie de l’ingénieur | PR | anh-minh.tang@enpc.fr" data-lab="navier" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EfYV-80_2hFKpduSYZDjdlsB8gbhHl3XiwRNZn7M3CphjQ?e=eRKdWa" rel="noopener" target="_blank">Stockage intersaisonier de chaleur</a></h3>
+<div class="meta">
+        👤 Anh Minh TANG
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">NAVIER</span>  |  📧 <a href="mailto:anh-minh.tang@enpc.fr">anh-minh.tang@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Géothermie, transfert thermique, stockage</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Du micron au mètre : à la découverte de l’hétérogénéité</span> <span class="tag">Géomécanique et énergie</span> <span class="tag">Rhéologie de l’ingénieur : des matériaux entre fluide et solide</span></div>
+</article>
+<article class="card" data-courses="Introduction au calcul économique" data-haystack="Création d’un produit innovant : de l’idée au MVP (produit minimum viable) | Charlotte ENGRAND | DRIPE | Innovation, Entrepreneuriat, Start-up | Introduction au calcul économique | PR | charlotte.engrand@enpc.fr" data-lab="dripe" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EdyYXCQcrcNAsJM2gP3DdgsB3TcXLbrVhj5dWLLe_WGa8w?e=6zNwbr" rel="noopener" target="_blank">Création d’un produit innovant : de l’idée au MVP (produit minimum viable)</a></h3>
+<div class="meta">
+        👤 Charlotte ENGRAND
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">DRIPE</span>  |  📧 <a href="mailto:charlotte.engrand@enpc.fr">charlotte.engrand@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Innovation, Entrepreneuriat, Start-up</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Introduction au calcul économique</span></div>
+</article>
+<article class="card" data-courses="Algorithmique et structure des données" data-haystack="Trucage photographique par inpainting | Pascal MONASSE | LIGM | traitement d’images, remplissage de zones manquantes | PR | pascal.monasse@enpc.fr" data-lab="ligm" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EfdoC8aJ1jJIvSnt_DVnjuUBvVB9ELxrzmq8HaoVdAkR7A?e=gpaaUx" rel="noopener" target="_blank">Trucage photographique par inpainting</a></h3>
+<div class="meta">
+        👤 Pascal MONASSE
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LIGM</span>  |  📧 <a href="mailto:pascal.monasse@enpc.fr">pascal.monasse@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ traitement d’images, remplissage de zones manquantes</div>
+</article>
+<article class="card" data-courses="Algorithmique et structure des données" data-haystack="Détection de bords dans les images | Pascal MONASSE | LIGM | traitement d’images, bords, gradient, lignes de niveau, contraste | PR | pascal.monasse@enpc.fr" data-lab="ligm" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EcSgNXeB3mNEh0OkqWf892wBQmX3ZTCRGRGaEEKslWZ2zw?e=uR4QYd" rel="noopener" target="_blank">Détection de bords dans les images</a></h3>
+<div class="meta">
+        👤 Pascal MONASSE
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LIGM</span>  |  📧 <a href="mailto:pascal.monasse@enpc.fr">pascal.monasse@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ traitement d’images, bords, gradient, lignes de niveau, contraste</div>
+</article>
+<article class="card" data-courses="Modèles mathématiques pour la géographie" data-haystack="Mise en perspective des Zones Climatiques Locales à l’aide d’observations satellitaires | Pierre Antoine VERSINI | HM&amp;Co | îlots de chaleur, végétalisation, analyse multi-échelle | Modèles mathématiques pour la géographie | PR | pierre-antoine.versini@enpc.fr" data-lab="hm&amp;co" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ERXmoaJ6cGpEhdWF9YKQrNcBqya5TozvCjKvVvHeE-v7VQ?e=We0zp8" rel="noopener" target="_blank">Mise en perspective des Zones Climatiques Locales à l’aide d’observations satellitaires</a></h3>
+<div class="meta">
+        👤 Pierre Antoine VERSINI
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">HM&amp;Co</span>  |  📧 <a href="mailto:pierre-antoine.versini@enpc.fr">pierre-antoine.versini@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ îlots de chaleur, végétalisation, analyse multi-échelle</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Modèles mathématiques pour la géographie</span></div>
+</article>
+<article class="card" data-courses="Décision dans l’incertain" data-haystack="OPTIMISATION D’UN MIX ENERGETIQUE | Pierre Cyril AUBIN | CERMICS | optimisation (continue avec contraintes), mix énergétique, décision intertemporelle | Décision dans l’incertain | PR | pierre-cyril.aubin@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ES889nZu8t9DtmSjFK8LpoYBuVhWfjE4Di3Jt5mMzuoYpA?e=33lc8g" rel="noopener" target="_blank">OPTIMISATION D’UN MIX ENERGETIQUE</a></h3>
+<div class="meta">
+        👤 Pierre Cyril AUBIN
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:pierre-cyril.aubin@enpc.fr">pierre-cyril.aubin@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ optimisation (continue avec contraintes), mix énergétique, décision intertemporelle</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Décision dans l’incertain</span></div>
+</article>
+<article class="card" data-courses="Décision dans l’incertain" data-haystack="OPTIMISATION POUR LA RENOVATION URBAINE | Pierre Cyril AUBIN | CERMICS | optimisation (mixte-entier, Bellman), rénovation urbaine, décision intertemporelle | Décision dans l’incertain | PR | pierre-cyril.aubin@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EYKeji3d849KhTY-4ccae1UB0Hz87SunAI8ybpE2cc1dEw?e=47amZ0" rel="noopener" target="_blank">OPTIMISATION POUR LA RENOVATION URBAINE</a></h3>
+<div class="meta">
+        👤 Pierre Cyril AUBIN
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:pierre-cyril.aubin@enpc.fr">pierre-cyril.aubin@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ optimisation (mixte-entier, Bellman), rénovation urbaine, décision intertemporelle</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Décision dans l’incertain</span></div>
+</article>
+<article class="card" data-courses="" data-haystack="Coût, carbone et performance une métrique intégrée pour les bétons bas carbone | Rachida IDIR | MCD | Béton bas carbone, Analyse du cycle de vie, Indicateurs hybrides, Coût, Empreinte carbone, Résistance en compression, Aide à la décision, Analyse de sensibilité, Normalisation des données | PR | rachida.idir@cerema.fr" data-lab="mcd" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ETxyRnJJOmJItf14zGum_90BP2RQn2AfnSU-9tAsJngcNA?e=NmUwon" rel="noopener" target="_blank">Coût, carbone et performance une métrique intégrée pour les bétons bas carbone</a></h3>
+<div class="meta">
+        👤 Rachida IDIR
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">MCD</span>  |  📧 <a href="mailto:rachida.idir@cerema.fr">rachida.idir@cerema.fr</a>
+</div>
+<div class="keywords">🗝️ Béton bas carbone, Analyse du cycle de vie, Indicateurs hybrides, Coût, Empreinte carbone, Résistance en compression, Aide à la décision, Analyse de sensibilité, Normalisation des données</div>
+</article>
+<article class="card" data-courses="" data-haystack="Gestion et évaluation environnementale des matériaux critiques dans l'industrie pharmaceutique : vers une économie circulaire | Rachida IDIR | MCD | Matériaux critiques, matériaux stratégiques, évaluation environnementale, Économie circulaire, industrie pharmaceutique | PR | rachida.idir@cerema.fr" data-lab="mcd" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EWrwQD1zbKtLnapFaOw-gdoBWMMYHM1hItFTj12rm6PB5g?e=ab5Lbs" rel="noopener" target="_blank">Gestion et évaluation environnementale des matériaux critiques dans l'industrie pharmaceutique : vers une économie circulaire</a></h3>
+<div class="meta">
+        👤 Rachida IDIR
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">MCD</span>  |  📧 <a href="mailto:rachida.idir@cerema.fr">rachida.idir@cerema.fr</a>
+</div>
+<div class="keywords">🗝️ Matériaux critiques, matériaux stratégiques, évaluation environnementale, Économie circulaire, industrie pharmaceutique</div>
+</article>
+<article class="card" data-courses="" data-haystack="Gestion du verre issu du recyclage dans une économie circulaire | Rachida IDIR | MCD | Recyclage du verre, Économie circulaire, Gestion des déchets, Valorisation des matériaux, Réutilisation, Industrie verrière, Modèles économiques durables | PR | rachida.idir@cerema.fr" data-lab="mcd" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EZrzo1V17rZApP87Wi7jxhIBWGtJLpIfYHP2_oiRnksoFQ?e=WcLFw4" rel="noopener" target="_blank">Gestion du verre issu du recyclage dans une économie circulaire</a></h3>
+<div class="meta">
+        👤 Rachida IDIR
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">MCD</span>  |  📧 <a href="mailto:rachida.idir@cerema.fr">rachida.idir@cerema.fr</a>
+</div>
+<div class="keywords">🗝️ Recyclage du verre, Économie circulaire, Gestion des déchets, Valorisation des matériaux, Réutilisation, Industrie verrière, Modèles économiques durables</div>
+</article>
+<article class="card" data-courses="" data-haystack="Étude de la robustesse des méthodes de calcul d’indicateurs environnementaux - étude de cas sur le laitier de haut-fourneau | Rachida IDIR | MCD | Analyse du cycle de vie LCA, robustesse, variabilité, sensibilité, méthodes d’évaluation, catégories d’impacts | PR | rachida.idir@cerema.fr" data-lab="mcd" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ERch9oslzp9Pi_RRUzNG7EIB7XDz2ya-F6q3YLs76312Lg?e=vHcLVY" rel="noopener" target="_blank">Étude de la robustesse des méthodes de calcul d’indicateurs environnementaux - étude de cas sur le laitier de haut-fourneau</a></h3>
+<div class="meta">
+        👤 Rachida IDIR
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">MCD</span>  |  📧 <a href="mailto:rachida.idir@cerema.fr">rachida.idir@cerema.fr</a>
+</div>
+<div class="keywords">🗝️ Analyse du cycle de vie LCA, robustesse, variabilité, sensibilité, méthodes d’évaluation, catégories d’impacts</div>
+</article>
+<article class="card" data-courses="Pratique du calcul scientifique" data-haystack="COMPORTEMENT THERMOMECANIQUE D’UN RAIL DE LA SNCF | Kévin LIPPERA | DotBlocks | Thermique, Rail, Transport, Modélisation, Simulation numérique | Pratique du calcul scientifique | PR | kevin.lippera@dotblocks.fr" data-lab="dotblocks" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EZq4Ll-9F5dCvJz7umg7WlQBbeYtOJEbIwkeWz7yLSFY0w?e=Ipj5cZ" rel="noopener" target="_blank">COMPORTEMENT THERMOMECANIQUE D’UN RAIL DE LA SNCF</a></h3>
+<div class="meta">
+        👤 Kévin LIPPERA
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">DotBlocks</span>  |  📧 <a href="mailto:kevin.lippera@dotblocks.fr">kevin.lippera@dotblocks.fr</a>
+</div>
+<div class="keywords">🗝️ Thermique, Rail, Transport, Modélisation, Simulation numérique</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Pratique du calcul scientifique</span></div>
+</article>
+<article class="card" data-courses="Pratique du calcul scientifique||Analyse 2" data-haystack="Baignade en Seine : analyse spectrale de signaux de la qualité microbiologique de l’eau | Arthur GUILLOT LEGOFF | LEESU/LHSV | Qualité de l’eau, Analyse spectrale, Baignade urbaine, Suivi environnemental | Pratique du calcul scientifique ; Analyse 2 ; Environnement - développement durable | PR | arthur.guillot-legoff@enpc.fr" data-lab="leesu/lhsv" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Ee92s5PRbxNNgO8YmWB05sEB5rFRqZbXobKoi-1_Q-MbCA?e=79LMJy" rel="noopener" target="_blank">Baignade en Seine : analyse spectrale de signaux de la qualité microbiologique de l’eau</a></h3>
+<div class="meta">
+        👤 Arthur GUILLOT LEGOFF
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LEESU/LHSV</span>  |  📧 <a href="mailto:arthur.guillot-legoff@enpc.fr">arthur.guillot-legoff@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Qualité de l’eau, Analyse spectrale, Baignade urbaine, Suivi environnemental</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Pratique du calcul scientifique</span> <span class="tag">Analyse 2</span></div>
+</article>
+<article class="card" data-courses="Physique statistique" data-haystack="Machine Learning et dynamique moléculaire | Jean-Baptiste HIMBERT | CERMICS | Machine learning, physique statistique, métastabilité | Physique statistique | PR | Jean-Baptiste.HIMBERT@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EeS-7lxCF5xHi8klfNWNu1MB_VXrdqpn-SYPRJyZ-Nhk-g?e=uwz8Jf" rel="noopener" target="_blank">Machine Learning et dynamique moléculaire</a></h3>
+<div class="meta">
+        👤 Jean-Baptiste HIMBERT
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:Jean-Baptiste.HIMBERT@enpc.fr">Jean-Baptiste.HIMBERT@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Machine learning, physique statistique, métastabilité</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Physique statistique</span></div>
+</article>
+<article class="card" data-courses="Algorithmique et structures de données||Géomécanique et énergie||Introduction aux sciences des données" data-haystack="ANALYSE DES DONNÉES DE CREUSEMENT DE TUNNELS | Lina Maria GUAYACAN CARRILLO | Navier | tunnel, tassements, statistiques, visualisation, machine learning | Algorithmique et structures de données ; Géomécanique et énergie | PR | lina.guayacan@enpc.fr" data-lab="navier" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/Edf2Bo_S4fJKkw0HTzzstVsBlvZNwZuuIEdWOS3mGf2AUQ?e=evY8UI" rel="noopener" target="_blank">ANALYSE DES DONNÉES DE CREUSEMENT DE TUNNELS</a></h3>
+<div class="meta">
+        👤 Lina Maria GUAYACAN CARRILLO
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">Navier</span>  |  📧 <a href="mailto:lina.guayacan@enpc.fr">lina.guayacan@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ tunnel, tassements, statistiques, visualisation, machine learning</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Algorithmique et structures de données</span> <span class="tag">Géomécanique et énergie</span> <span class="tag">Introduction aux sciences des données</span></div>
+</article>
+<article class="card" data-courses="" data-haystack="Repenser l’affectation des enseignants : modélisation et simulation d’un mécanisme d’appariement dynamique | Charlotte MARTRES | Paris School of Economics, EHESS | Marchés d’appariement, théorie des jeux | PR | charlotte.martres@PCemail.eu" data-lab="paris school of economics, ehess" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EVPiWdk8qeVGj30myLL7mUEBkO_PS5gWpAgc00Izy2dBTA?e=Gi4tDk" rel="noopener" target="_blank">Repenser l’affectation des enseignants : modélisation et simulation d’un mécanisme d’appariement dynamique</a></h3>
+<div class="meta">
+        👤 Charlotte MARTRES
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">Paris School of Economics, EHESS</span>  |  📧 <a href="mailto:charlotte.martres@PCemail.eu">charlotte.martres@PCemail.eu</a>
+</div>
+<div class="keywords">🗝️ Marchés d’appariement, théorie des jeux</div>
+</article>
+<article class="card" data-courses="" data-haystack="Intégration des énergies renouvelables intermittentes dans le mix : impact prix et leviers d’actions publics | Maryeme KETTANI | EDF | PR | maryeme.kettani@gmail.com" data-lab="edf" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/EWPlYhxqjktKt4yhOi5wqgMBBYvbCyDfE9dB6lFsMXYUCQ?e=Md2gEq" rel="noopener" target="_blank">Intégration des énergies renouvelables intermittentes dans le mix : impact prix et leviers d’actions publics</a></h3>
+<div class="meta">
+        👤 Maryeme KETTANI
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">EDF</span>  |  📧 <a href="mailto:maryeme.kettani@gmail.com">maryeme.kettani@gmail.com</a>
+</div>
+</article>
+<article class="card" data-courses="Introduction aux sciences des données||mécanique des fluides" data-haystack="ARBRE DE PLUIE | Martin SEIDL | LEESU | Marchés d’appariement, théorie des jeux | PR | martin.seidl@enpc.fr" data-lab="leesu" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/EW0jshCiHTZHugW8uPLclZEBw8jh-VYWY8ekgCVnlDNYZQ?e=IqBwnU" rel="noopener" target="_blank">ARBRE DE PLUIE</a></h3>
+<div class="meta">
+        👤 Martin SEIDL
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LEESU</span>  |  📧 <a href="mailto:martin.seidl@enpc.fr">martin.seidl@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Marchés d’appariement, théorie des jeux</div>
+</article>
+<article class="card" data-courses="Mécanique quantique" data-haystack="Informatique quantique | Alicia NEGRE | CERMICS | algorithmes quantiques, mécanique quantique, chimie théorique | PR | alicia.negre@enpc.fr" data-lab="cermics" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EZYVyrZScDFBi_X_p6yCSr4BLwybZNAH6CdAHR-TVE6MmA?e=Xxh4Co" rel="noopener" target="_blank">Informatique quantique</a></h3>
+<div class="meta">
+        👤 Alicia NEGRE
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">CERMICS</span>  |  📧 <a href="mailto:alicia.negre@enpc.fr">alicia.negre@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ algorithmes quantiques, mécanique quantique, chimie théorique</div>
+</article>
+<article class="card" data-courses="Introduction aux sciences des données" data-haystack="ECOLOGIE MICROBIENNE DES PROCÉDÉS DE BIOTECHNOLOGIE ENVIRONNEMENTALE | Brigitte VINCON LEITE | LEESU | Ecologie microbienne, transition énergétique, analyse biostatistique de données | Introduction aux sciences des données | PC | b.vincon-leite@enpc.fr" data-lab="leesu" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:b:/g/personal/christos_papoutsellis_enpc_fr/EY0be_haigFMkh9A0czFF_YB_hvFdaNMN10f1gYXYxr-ZA?e=w2yxRF" rel="noopener" target="_blank">ECOLOGIE MICROBIENNE DES PROCÉDÉS DE BIOTECHNOLOGIE ENVIRONNEMENTALE</a></h3>
+<div class="meta">
+        👤 Brigitte VINCON LEITE
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LEESU</span>  |  📧 <a href="mailto:b.vincon-leite@enpc.fr">b.vincon-leite@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ Ecologie microbienne, transition énergétique, analyse biostatistique de données</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Introduction aux sciences des données</span></div>
+</article>
+<article class="card" data-courses="" data-haystack="Élaboration de courbes de dommage des infrastructures face au changement climatique | Nadia LE MOIGNE | setec international | résilience des infrastructures, changement climatique, adaptation, dommage, coût de l’inaction | PR | nadia.le-moigne@enpc.fr" data-lab="setec international" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/Eas8vygCR3VKhVDAAti4euEBJmXxE_ejNc3yrG2owr7pfw?e=b3TNo0" rel="noopener" target="_blank">Élaboration de courbes de dommage des infrastructures face au changement climatique</a></h3>
+<div class="meta">
+        👤 Nadia LE MOIGNE
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">setec international</span>  |  📧 <a href="mailto:nadia.le-moigne@enpc.fr">nadia.le-moigne@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ résilience des infrastructures, changement climatique, adaptation, dommage, coût de l’inaction</div>
+</article>
+<article class="card" data-courses="" data-haystack="Optimisation des flux énergétiques dans un Microgrid résidentiel | Mohamed Saad EL HARRAB | Co-Innovation Lab, Data Science &amp; Industrial Engineering Team | PR | mohamed-saad.el-harrab@enpc.fr" data-lab="co-innovation lab, data science &amp; industrial engineering team" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ERpTnXDBFr1JingGAqYk57IB2nFp1uAxfOfx76_pzmso9Q?e=yhzNgp" rel="noopener" target="_blank">Optimisation des flux énergétiques dans un Microgrid résidentiel</a></h3>
+<div class="meta">
+        👤 Mohamed Saad EL HARRAB
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">Co-Innovation Lab, Data Science &amp; Industrial Engineering Team</span>  |  📧 <a href="mailto:mohamed-saad.el-harrab@enpc.fr">mohamed-saad.el-harrab@enpc.fr</a>
+</div>
+</article>
+<article class="card" data-courses="" data-haystack="PROJET FABIA : CRÉER L'ASSISTANT INTELLIGENT DU FABLAB | Gilles BUISSON | Service des Moyens Pédagogiques |  |  | PC | gilles.buisson@enpc.fr" data-lab="service des moyens pédagogiques" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/ETFeDv3aqf1IoTsd3bXIePMBvHjjJIOmZdlie69nwoeZxg?e=szSZLp" rel="noopener" target="_blank">PROJET FABIA : CRÉER L'ASSISTANT INTELLIGENT DU FABLAB</a></h3>
+<div class="meta">
+        👤 Gilles BUISSON
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">Service des Moyens Pédagogiques</span>  |  📧 <a href="mailto:gilles.buisson@enpc.fr">gilles.buisson@enpc.fr</a>
+</div>
+</article>
+<article class="card" data-courses="Recherche opérationnelle et transport" data-haystack="Gérer des flux de voyageur.ses pour une mobilité bas carbone : quelles stratégies ? | Capucine-Marin DUBROCA-VOISIN | LVMT | mobilités, flux, gestion des flux, bas carbone, ferroviaire  | Recherche opérationnelle et transport | PC | capucine-marin.dubroca-voisin@enpc.fr" data-lab="lvmt" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EZ1cG1rnqW9In-SXjA2-7k4BBG9RPeHUd600d4x6yU59Mw?e=lVqjto" rel="noopener" target="_blank">Gérer des flux de voyageur.ses pour une mobilité bas carbone : quelles stratégies ?</a></h3>
+<div class="meta">
+        👤 Capucine-Marin DUBROCA-VOISIN
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LVMT</span>  |  📧 <a href="mailto:capucine-marin.dubroca-voisin@enpc.fr">capucine-marin.dubroca-voisin@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ mobilités, flux, gestion des flux, bas carbone, ferroviaire </div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Recherche opérationnelle et transport</span></div>
+</article>
+<article class="card" data-courses="Algorithmique et structures de données" data-haystack="Modéliser en open source la mobilité des personnes grâce à Mobility | Capucine-Marin DUBROCA-VOISIN | LVMT | mobilité, modélisation, open source | Algorithmique et structures de données | PC | capucine-marin.dubroca-voisin@enpc.fr" data-lab="lvmt" data-track="PC">
+<h3><a href="https://enpcfr-my.sharepoint.com/:w:/g/personal/christos_papoutsellis_enpc_fr/EQQ0qOS3OXNDiSk4q4FQ2qEBMqDSUonh8j6ATFq-wKEmzA?e=EStEaj" rel="noopener" target="_blank">Modéliser en open source la mobilité des personnes grâce à Mobility</a></h3>
+<div class="meta">
+        👤 Capucine-Marin DUBROCA-VOISIN
+         |  <span class="badge pc">PC</span>
+          <span class="badge lab">LVMT</span>  |  📧 <a href="mailto:capucine-marin.dubroca-voisin@enpc.fr">capucine-marin.dubroca-voisin@enpc.fr</a>
+</div>
+<div class="keywords">🗝️ mobilité, modélisation, open source</div>
+<div class="courses"><strong>Cours recommandés :</strong> <span class="tag">Algorithmique et structures de données</span></div>
+</article>
+</section>
+</main>
+<footer class="footer">
+    Source : “Projets_1A_271025_links.xlsx” — champs affichés : Titre (lien), Encadrant(s), Cours recommandés, Mots-clés, PR/PC.
+  </footer>
+<script>
+function norm(s){return (s||'').toLowerCase()}
+function getSelectedCourses(){
+  const boxes = document.querySelectorAll('input[name="course"]:checked');
+  return Array.from(boxes).map(b => b.value);
+}
+function filterCards(){
+  const q = norm(document.getElementById('search').value);
+  const lab = norm(document.getElementById('lab').value);
+  const track = document.getElementById('track').value; // PR or PC or ''
+  const wantCourses = getSelectedCourses();
+  const cards = document.querySelectorAll('.card');
+  let shown = 0;
+  cards.forEach(c=>{
+    const hay = c.dataset.haystack;
+    const labv = c.dataset.lab;
+    const trackv = c.dataset.track;
+    const courses = c.dataset.courses; // 'c1||c2||...'
+    const okQ = !q || hay.includes(q);
+    const okLab = !lab || labv === lab;
+    const okTrack = !track || trackv === track;
+    let okCourses = true;
+    if(wantCourses.length){
+      okCourses = wantCourses.some(w => courses.includes(w));
+    }
+    const show = okQ && okLab && okTrack && okCourses;
+    c.style.display = show ? '' : 'none';
+    if(show) shown++;
+  });
+  document.getElementById('count').textContent = shown + ' projet(s)';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('search').addEventListener('input', filterCards);
+  document.getElementById('lab').addEventListener('change', filterCards);
+  document.getElementById('track').addEventListener('change', filterCards);
+  document.querySelectorAll('input[name="course"]').forEach(b=> b.addEventListener('change', filterCards));
+  filterCards();
+});
+</script>
+<script>
+(function(){
+  function norm(s){
+    if(!s) return "";
+    return s.toString()
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'') // strip accents
+      .replace(/[“”«»]/g,'"')
+      .replace(/[’]/g,"'")
+      .replace(/\s+/g,' ')
+      .trim();
+  }
+
+  function applyFilters(){
+    var q = norm(document.getElementById('search') ? document.getElementById('search').value : '');
+    var labSel   = document.getElementById('lab');
+    var trackSel = document.getElementById('track');
+    var courseSel= document.getElementById('course');
+
+    var labVal    = labSel   ? norm(labSel.value)   : '';
+    var trackVal  = trackSel ? (trackSel.value || '') : '';
+    var courseVal = courseSel? norm(courseSel.value): '';
+
+    var cards = Array.from(document.querySelectorAll('.card'));
+    var shown = 0;
+    cards.forEach(function(card){
+      // text filter
+      var hay = norm(card.getAttribute('data-haystack') || '');
+      var textOK = !q || hay.indexOf(q) !== -1;
+
+      // lab filter
+      var lab = norm(card.getAttribute('data-lab') || '');
+      var labOK = !labVal || lab === labVal;
+
+      // track filter
+      var track = (card.getAttribute('data-track') || '');
+      var trackOK = !trackVal || track === trackVal;
+
+      // course filter (data-courses: 'A||B||C')
+      var coursesRaw = card.getAttribute('data-courses') || '';
+      var coursesList = coursesRaw.split('||').map(norm).filter(Boolean);
+      var courseOK = !courseVal || coursesList.some(function(c){
+        return c === courseVal || c.indexOf(courseVal) !== -1;
+      });
+
+      var ok = textOK && labOK && trackOK && courseOK;
+      card.style.display = ok ? '' : 'none';
+      if(ok) shown++;
+    });
+
+    var cnt = document.getElementById('count');
+    if(cnt){ cnt.textContent = shown + ' projet' + (shown>1?'s':''); }
+  }
+
+  function hook(){
+    var search = document.getElementById('search');
+    if(search){ search.addEventListener('input', applyFilters); }
+
+    ['lab','track','course'].forEach(function(id){
+      var sel = document.getElementById(id);
+      if(sel){ sel.addEventListener('change', applyFilters); }
+    });
+
+    // Default state: no filter selected => show all
+    var track = document.getElementById('track');
+    if(track){ track.value = ''; }
+    var lab = document.getElementById('lab');
+    if(lab){ lab.value = ''; }
+    var course = document.getElementById('course');
+    if(course){ course.value = ''; }
+
+    applyFilters();
+  }
+
+  if(document.readyState !== 'loading') hook();
+  document.addEventListener('DOMContentLoaded', hook);
+  window.applyFilters = applyFilters;
+})();
+</script><script>
+(function(){
+  function boost(){
+    var course = document.getElementById('course');
+    if(course && !course._hooked){
+      course.addEventListener('change', function(){ if(window.applyFilters) applyFilters(); });
+      course._hooked = true;
+    }
+  }
+  if(document.readyState !== 'loading') boost();
+  document.addEventListener('DOMContentLoaded', boost);
+})();
+</script></body>
+</html>
